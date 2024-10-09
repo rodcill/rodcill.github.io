@@ -1,6 +1,4 @@
-# README - Rodcill
-
-## Tentang Rodcill
+# Tentang Rodcill
 
 Rodcill adalah perusahaan rintisan yang fokus pada pengembangan konten kreator digital. Kami berkomitmen untuk memberikan platform dan sumber daya yang dibutuhkan oleh para kreator untuk mengekspresikan diri, berbagi ide, dan menjangkau audiens yang lebih luas. Dengan pemahaman mendalam tentang dunia digital, Rodcill hadir untuk mendukung inovasi dan kreativitas dalam ekosistem konten.
 
