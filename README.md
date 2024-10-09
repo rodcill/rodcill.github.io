@@ -34,7 +34,7 @@ Kami mengundang semua konten kreator untuk bergabung dengan Rodcill. Mari bersam
 
 Untuk informasi lebih lanjut, silakan hubungi kami di:
 - Email: contact@rodcil.com
-- Website: www.rodcil.github.io
+- Website: www.rodcill.github.io
 - Media Sosial: [Instagram](https://instagram.com/rodcill), [Twitter](https://twitter.com/rodcill), [Facebook](https://facebook.com/rodcill)
 
 Terima kasih telah mengunjungi Rodcill! Bersama, kita bisa menciptakan konten yang luar biasa!
