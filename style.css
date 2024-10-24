@@ -36,6 +36,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
     padding: 20px;
+    margin: 0 20px; /* Add margin to create space on the left and right */
     background-color: #fff;
 }
 
