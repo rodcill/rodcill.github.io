@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Layout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calendar-header">
+        <button class="today-btn">TODAY</button>
+        <div class="month-year">
+            <span>July 2023</span>
+        </div>
+        <button class="nav-btn">&#9664;</button>
+        <button class="nav-btn">&#9654;</button>
+    </div>
+
+    <div class="calendar">
+        <!-- Days of the week -->
+        <div class="week-day">Sun</div>
+        <div class="week-day">Mon</div>
+        <div class="week-day">Tue</div>
+        <div class="week-day">Wed</div>
+        <div class="week-day">Thu</div>
+        <div class="week-day">Fri</div>
+        <div class="week-day">Sat</div>
+
+        <!-- Calendar days -->
+        <!-- First row -->
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+
+        <!-- Second row -->
+        <div class="day">9</div>
+        <div class="day filled">
+            <div class="day-number">10</div>
+            <div class="details">$391 <br> 1 trade</div>
+        </div>
+        <div class="day filled">
+            <div class="day-number">11</div>
+            <div class="details">$330 <br> 3 trades</div>
+        </div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+        <div class="day"></div>
+
+        <!-- Repeat rows for other weeks as needed -->
+    </div>
+</body>
+</html>
