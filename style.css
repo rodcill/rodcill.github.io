@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    background-color: #f5f5f5;
 }
 
 .container {
@@ -21,6 +21,9 @@ header {
     background: #003087;
     color: #fff;
     padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header nav ul {
@@ -41,10 +44,7 @@ header nav ul li a {
 
 .user-controls {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .bell-icon,
@@ -68,7 +68,7 @@ main {
 }
 
 .wallet-summary {
-    background: #f4f4f4;
+    background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -86,11 +86,12 @@ main {
 
 .wallet-info h2 {
     font-size: 24px;
+    color: #003087;
 }
 
 .wallet-info .balance {
     font-size: 36px;
-    color: #003087;
+    color: #333;
     margin-top: 10px;
 }
 
@@ -100,8 +101,24 @@ main {
     margin-top: 5px;
 }
 
+.wallet-info .primary-status {
+    background: #00a950;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.wallet-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .wallet-actions .primary-button {
-    background: #003087;
+    background: #0070ba;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
@@ -114,7 +131,7 @@ main {
 .wallet-actions .secondary-link {
     display: block;
     margin-top: 10px;
-    color: #007BFF;
+    color: #0070ba;
     text-decoration: none;
 }
 
@@ -125,6 +142,7 @@ main {
 /* Linked Accounts */
 .linked-accounts {
     text-align: left;
+    margin-top: 20px;
 }
 
 .account {
@@ -135,10 +153,17 @@ main {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.account p {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
 /* Footer */
 footer {
     background: #003087;
     color: #fff;
     text-align: center;
     padding: 10px 0;
+    margin-top: 50px;
 }
