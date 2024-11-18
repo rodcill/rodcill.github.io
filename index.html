@@ -1,23 +1,120 @@
-# Jurnal Trading
-
-| No | Tanggal      | Pasangan Mata Uang | Posisi | Harga Beli ($) | Harga Jual ($) | Volume | Keuntungan/Rugi ($) | Catatan              |
-|----|--------------|--------------------|--------|----------------|----------------|--------|----------------------|----------------------|
-| 1  | 2024-11-18   | EUR/USD            | Buy    | 1.1000         | 1.1050         | 1000   | 50                   | Transaksi pertama    |
-| 2  | 2024-11-18   | GBP/USD            | Sell   | 1.3500         | 1.3450         | 1000   | 50                   | Take profit tercapai |
-| 3  | 2024-11-18   | USD/JPY            | Buy    | 150.5000       | 150.7000       | 500    | 100                  | Stabilisasi harga    |
-| 4  | 2024-11-19   | EUR/USD            | Sell   | 1.1050         | 1.1000         | 1000   | 50                   | Rugi kecil           |
-| 5  | 2024-11-19   | AUD/USD            | Buy    | 0.6750         | 0.6800         | 2000   | 100                  | Target tercapai      |
-
-## Penjelasan Kolom
-
-- **No**: Nomor urut transaksi.
-- **Tanggal**: Tanggal transaksi dilakukan.
-- **Pasangan Mata Uang**: Pasangan mata uang yang diperdagangkan.
-- **Posisi**: Jenis transaksi, apakah **Buy** atau **Sell**.
-- **Harga Beli**: Harga pada saat transaksi dibuka.
-- **Harga Jual**: Harga pada saat transaksi ditutup.
-- **Volume**: Jumlah unit mata uang yang diperdagangkan.
-- **Keuntungan/Rugi**: Keuntungan atau kerugian yang dihasilkan dari transaksi tersebut (dalam USD).
-- **Catatan**: Keterangan tambahan mengenai transaksi tersebut, misalnya alasan melakukan transaksi, target, atau kondisi pasar saat itu.
-
-Jurnal ini bisa digunakan untuk melacak performa trading Anda, membantu dalam analisis hasil, dan mengidentifikasi pola dalam keputusan trading.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Trading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jurnal Trading</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Pasangan Mata Uang</th>
+                <th>Posisi</th>
+                <th>Harga Beli ($)</th>
+                <th>Harga Jual ($)</th>
+                <th>Volume</th>
+                <th>Keuntungan/Rugi ($)</th>
+                <th>Catatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2024-11-18</td>
+                <td>EUR/USD</td>
+                <td>Buy</td>
+                <td>1.1000</td>
+                <td>1.1050</td>
+                <td>1000</td>
+                <td>50</td>
+                <td>Transaksi pertama</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2024-11-18</td>
+                <td>GBP/USD</td>
+                <td>Sell</td>
+                <td>1.3500</td>
+                <td>1.3450</td>
+                <td>1000</td>
+                <td>50</td>
+                <td>Take profit tercapai</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2024-11-18</td>
+                <td>USD/JPY</td>
+                <td>Buy</td>
+                <td>150.5000</td>
+                <td>150.7000</td>
+                <td>500</td>
+                <td>100</td>
+                <td>Stabilisasi harga</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2024-11-19</td>
+                <td>EUR/USD</td>
+                <td>Sell</td>
+                <td>1.1050</td>
+                <td>1.1000</td>
+                <td>1000</td>
+                <td>50</td>
+                <td>Rugi kecil</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2024-11-19</td>
+                <td>AUD/USD</td>
+                <td>Buy</td>
+                <td>0.6750</td>
+                <td>0.6800</td>
+                <td>2000</td>
+                <td>100</td>
+                <td>Target tercapai</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="note">
+        Catatan: Jurnal ini digunakan untuk mencatat setiap transaksi dan membantu dalam analisis trading.
+    </p>
+</body>
+</html>
