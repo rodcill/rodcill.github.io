@@ -79,9 +79,9 @@ Dengan simulasi ini, modal yang dimulai dari **$0.40** akan berkembang sangat pe
 ## Metabrani Metode evaluasi tinggi atas bawah rendah awal nilai inti
 # Harga XAUUSD
 
-| Waktu |  Tinggi  |  Atas   | Bawah    | Rendah    | Awal    | Nilai    | Inti    | Keterangan pelengkap    |
-|-------|----------|---------|----------|-----------|---------|----------|---------|-------------------------|
-| H1    | 2653.86  |         |          |           |         |          |         |                         |
-| D1    |          |         |          |           |         |          |         |                         |
-| H1    | 2653.86  |         |          |           |         |          |         |                         |
-| D1    |          |         |          |           |         |          |         |                         |
+| Waktu                  |  Tinggi  |  Atas   | Bawah    | Rendah    | Awal      | Nilai    | Inti      | Jangkauan Poin | Keterangan pelengkap    |
+|------------------------|----------|---------|----------|-----------|-----------|----------|-----------|----------------|-------------------------|
+| 2024.11.27 13:12 M1    | 2647.33  | 13      |          | 2643.42   | 2647.20   |          | 2644.48   |                | Kaget, tiba-tiba 300 poin https://www.mql5.com/en/charts/20331323/xauusd-m1-tickmill-ltd |
+| D1                     |          |         |          |           |           |          |           |                |
+| H1                     | 2653.86  |         |          |           |           |          |           |                         |
+| D1                     |          |         |          |           |           |          |           |                         |
