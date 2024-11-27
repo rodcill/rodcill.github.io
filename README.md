@@ -75,3 +75,13 @@ Dengan simulasi ini, modal yang dimulai dari **$0.40** akan berkembang sangat pe
 - **Keuntungan 100% per transaksi** berarti modal yang digunakan pada setiap transaksi akan berlipat ganda setelah transaksi berhasil.
 - **Level** bertambah setiap kali transaksi berhasil, dan poin yang dicapai akan menjadi indikator pencapaian level berikutnya.
 - Tabel ini mengilustrasikan pertumbuhan modal dengan keuntungan yang sangat cepat. Pastikan untuk mempertimbangkan risiko dan strategi pengelolaan modal yang bijaksana saat menjalankan simulasi ini.
+
+## Metabrani Metode evaluasi tinggi atas bawah rendah awal nilai inti
+# Harga XAUUSD
+
+| Waktu |  Tinggi  |  Atas   | Bawah    | Rendah    | Awal    | Nilai    | Inti    | Keterangan pelengkap    |
+|-------|----------|---------|----------|-----------|---------|----------|---------|-------------------------|
+| H1    | 2653.86  |         |          |           |         |          |         |                         |
+| D1    |          |         |          |           |         |          |         |                         |
+| H1    | 2653.86  |         |          |           |         |          |         |                         |
+| D1    |          |         |          |           |         |          |         |                         |
