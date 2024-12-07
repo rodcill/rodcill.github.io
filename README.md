@@ -5,13 +5,13 @@
 <div class="w3-container" style="padding:0px 0px" id="atas"></div>
 <div class="w3-container" style="padding:0px 0px" id="beranda"></div>
 
-# [Gerbang Ekonomi Masa Depan 丰](https://vividbeloved.github.io)
+# [Rodcill 金](https://rodcill.github.io)
 <nav>
     <ul>
         <li><a href="#beranda"> Beranda</a></li>
         <li><a href="#bawah" class="w3-bar-item w3-button"> Bawah</a></li>
         <li><a href="#tabel" class="w3-bar-item w3-button"> Tabel</a></li>
-        <li><a href="#vividbeloved"> Vivid Beloved</a></li>
+        <li><a href="#rodcill"> Rodcill</a></li>
     </ul>
 </nav>
 <div align="center">
