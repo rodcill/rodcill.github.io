@@ -166,3 +166,8 @@ Dengan simulasi ini, modal yang dimulai dari **$0.40** akan berkembang sangat pe
 | D1                     |          |         |          |           |           |          |           |                |
 | H1                     | 2653.86  |         |          |           |           |          |           |                         |
 | D1                     |          |         |          |           |           |          |           |                         |
+
+Keterangan :
+Waktu adalah identitas angka jiwa harga inti yang terjadi.
+Tinggi adalah harga inti tertinggi di rodcill dalam kerangka waktu itu, nama lainnya adalah jangkauan
+Atas adalah harga inti yang di atas harga inti awal, nama lainnya adalah kodomain
