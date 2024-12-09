@@ -169,10 +169,10 @@ Dengan simulasi ini, modal yang dimulai dari **$0.40** akan berkembang sangat pe
 
 ## Keterangan :
 - Waktu adalah identitas angka jiwa harga inti yang terjadi
-- Tinggi adalah harga inti tertinggi di rodcill dalam kerangka waktu itu, nama lainnya adalah jangkauan
-- Atas adalah harga inti yang di atas harga inti awal, nama lainnya adalah kodomain
-- Bawah adalah harga inti yang di bawah harga inti awal, nama lainnya adalah kodomain
-- Rendah adalah harga inti yang terendah di rodcill dalam kerangka waktu itu, nama lainnya adalah jangkauan
+- Tinggi adalah harga inti tertinggi di rodcill dalam kerangka waktu itu, nama lainnya adalah jangkauan harga inti
+- Atas adalah harga inti yang di atas harga inti awal, nama lainnya adalah kodomain harga inti
+- Bawah adalah harga inti yang di bawah harga inti awal, nama lainnya adalah kodomain harga inti
+- Rendah adalah harga inti yang terendah di rodcill dalam kerangka waktu itu, nama lainnya adalah jangkauan harga inti
 - Awal adalah harga inti yang terjadi di detik pertama setiap menit
-- Nilai adalah harga inti yang terjadi antara nilai harga inti awal sampai harga inti
+- Nilai adalah harga inti yang terjadi antara nilai harga inti awal sampai harga inti, nama lainnya adalah domain
 - Inti adalah nilai harga yang terjadi di saat ini yang mengandung angka jiwa di pasar
