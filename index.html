@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Image Gallery</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>My To-Do List</h1>
-        <form id="task-form">
-            <input type="text" id="task-input" placeholder="Add a new task..." required>
-            <button type="submit">Add Task</button>
+        <h1>My Image Gallery</h1>
+        <form id="image-form">
+            <input type="url" id="image-url" placeholder="Enter image URL..." required>
+            <button type="submit">Add Image</button>
         </form>
-        <ul id="task-list"></ul>
+        <div id="gallery"></div>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
