@@ -1,26 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const taskForm = document.getElementById("task-form");
-    const taskInput = document.getElementById("task-input");
-    const taskList = document.getElementById("task-list");
+    const imageForm = document.getElementById("image-form");
+    const imageUrl = document.getElementById("image-url");
+    const gallery = document.getElementById("gallery");
+    const modal = document.getElementById("modal");
+    const modalImage = document.getElementById("modal-image");
+    const closeModal = document.getElementsByClassName("close")[0];
 
-    taskForm.addEventListener("submit", (e) => {
+    imageForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        addTask(taskInput.value);
-        taskInput.value = "";
+        addImage(imageUrl.value);
+        imageUrl.value = "";
     });
 
-    function addTask(task) {
-        const li = document.createElement("li");
-        li.textContent = task;
+    function addImage(url) {
+        const div = document.createElement("div");
+        div.className = "gallery-item";
 
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.className = "delete-btn";
-        deleteBtn.addEventListener("click", () => {
-            taskList.removeChild(li);
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "Gallery Image";
+        img.addEventListener("click", () => {
+            openModal(url);
         });
 
-        li.appendChild(deleteBtn);
-        taskList.appendChild(li);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "×";
+        deleteBtn.className = "delete-btn";
+        deleteBtn.addEventListener("click", () => {
+            gallery.removeChild(div);
+        });
+
+        div.appendChild(img);
+        div.appendChild(deleteBtn);
+        gallery.appendChild(div);
     }
+
+    function openModal(url) {
+        modal.style.display = "block";
+        modalImage.src = url;
+    }
+
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
 });
