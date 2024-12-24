@@ -30,11 +30,9 @@
             justify-content: center;
         }
         .front {
-            background-color: #ff8c88;
             color: black;
         }
         .back {
-            background-color: #333;
             color: white;
             transform: rotateY(180deg);
         }
@@ -51,11 +49,25 @@
             background-color: green;
             border-radius: 5px;
         }
+        /* Specific styles for Binance flip card */
+        .binance .front {
+            background-color: #ffcc00;
+        }
+        .binance .back {
+            background-color: #333;
+        }
+        /* Specific styles for Rodcill flip card */
+        .rodcill .front {
+            background-color: #1e90ff;
+        }
+        .rodcill .back {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
     <!-- Flip Card for Binance -->
-    <div class="flip-container">
+    <div class="flip-container binance">
         <div class="flipper">
             <div class="front estimate-button2">Binance</div>
             <div class="back estimate-button2">
@@ -65,7 +77,7 @@
     </div>
 
     <!-- Flip Card for Rodcill -->
-    <div class="flip-container">
+    <div class="flip-container rodcill">
         <div class="flipper">
             <div class="front estimate-button2">Rodcill</div>
             <div class="back estimate-button2">
