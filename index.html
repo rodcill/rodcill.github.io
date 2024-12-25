@@ -1,106 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rodcill</title>
-    <style>
-        .flip-container {
-            perspective: 1000px;
-            margin: 20px;
-        }
-        .flipper {
-            position: relative;
-            width: 200px;
-            height: 100px;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .flip-container:hover .flipper {
-            transform: rotateY(180deg);
-        }
-        .front, .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .front {
-            color: black;
-        }
-        .back {
-            color: white;
-            transform: rotateY(180deg);
-        }
-        .estimate-button2 {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        a {
-            text-decoration: none;
-            color: white;
-            padding: 10px;
-            background-color: green;
-            border-radius: 5px;
-        }
-        /* Specific styles for Binance flip card */
-        .binance .front {
-            background-color: #ffcc00;
-        }
-        .binance .back {
-            background-color: #333;
-        }
-        /* Specific styles for Rodcill flip card */
-        .rodcill .front {
-            background-color: #1e90ff;
-        }
-        .rodcill .back {
-            background-color: #555;
-        }
-        /* Specific styles for Grok flip card */
-        .grok .front {
-            background-color: #ff4500;
-        }
-        .grok .back {
-            background-color: #222;
-        }
-    </style>
+    <title>Portofolio Rodcill</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Flip Card for Binance -->
-    <div class="flip-container binance">
-        <div class="flipper">
-            <div class="front estimate-button2">Binance</div>
-            <div class="back estimate-button2">
-                <a href="https://www.binance.com/activity/referral-entry/CPA?ref=CPA_00Y2GTUS0U" target="_blank">Join Binance</a>
-            </div>
-        </div>
-    </div>
+    <header>
+        <h1>Rodcill</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">Tentang Saya</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Flip Card for Rodcill -->
-    <div class="flip-container rodcill">
-        <div class="flipper">
-            <div class="front estimate-button2">Rodcill</div>
-            <div class="back estimate-button2">
-                <a href="https://www.facebook.com/rodcill" target="_blank">Follow Rodcill</a>
-            </div>
-        </div>
-    </div>
+    <main>
+        <section id="about">
+            <h2>Tentang Saya</h2>
+            <p>Saya Rodcill, seorang pengembang web yang bersemangat tentang teknologi dan desain.</p>
+        </section>
 
-    <!-- Flip Card for Grok -->
-    <div class="flip-container grox">
-        <div class="flipper">
-            <div class="front estimate-button2">Grok</div>
-            <div class="back estimate-button2">
-                <a href="https://x.com/i/grok" target="_blank">Join Grok</a>
+        <section id="projects">
+            <h2>Proyek</h2>
+            <div class="project">
+                <h3>Proyek 1</h3>
+                <p>Deskripsi Proyek 1</p>
             </div>
-        </div>
-    </div>
+            <div class="project">
+                <h3>Proyek 2</h3>
+                <p>Deskripsi Proyek 2</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Kontak</h2>
+            <p>Email: rodcill@example.com</p>
+            <p>Telepon: +62 812 3456 7890</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rodcill. All rights reserved.</p>
+    </footer>
 </body>
 </html>
