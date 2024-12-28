@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Rodcill</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Nodepay Dashboard</title>
 </head>
 <body>
-    <header>
-        <h1>Rodcill</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">Tentang Saya</a></li>
-                <li><a href="#projects">Proyek</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
-
+  <div class="container">
+    <aside class="sidebar">
+      <div class="logo">nodepay</div>
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Referral Program</a></li>
+          <li><a href="#">Missions & Rewards</a></li>
+          <li class="active"><a href="#">Earnings</a></li>
+          <li><a href="#">Medal & Boost</a></li>
+        </ul>
+      </nav>
+      <div class="blog">
+        <p>Learn how to optimize your experience</p>
+        <a href="#">Read Blog</a>
+      </div>
+    </aside>
     <main>
-        <section id="about">
-            <h2>Tentang Saya</h2>
-            <p>Saya Rodcill, seorang pengembang web yang bersemangat tentang teknologi dan desain.</p>
-        </section>
-
-        <section id="projects">
-            <h2>Proyek</h2>
-            <div class="project">
-                <h3>Proyek 1</h3>
-                <p>Deskripsi Proyek 1</p>
+      <header class="header">
+        <h1>Hello, rodcil!</h1>
+        <button class="airdrop-button">Check Airdrop</button>
+      </header>
+      <section class="wallet-connection">
+        <h2>Wallet Connection</h2>
+        <p>To exchange your Nodepay Points for tokens, connect and verify your wallet. Complete the 3-step process to unlock token rewards.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Verify Your Email <span class="info-icon">i</span></h3>
+              <p>tabrani8@gmail.com</p>
+              <span class="check-icon">✔</span>
             </div>
-            <div class="project">
-                <h3>Proyek 2</h3>
-                <p>Deskripsi Proyek 2</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Connect Your Wallet <span class="info-icon">i</span></h3>
+              <p>2DmQ...qeqH <span class="copy-icon">📋</span></p>
+              <span class="check-icon">✔</span>
             </div>
-        </section>
-
-        <section id="contact">
-            <h2>Kontak</h2>
-            <p>Email: rodcill@example.com</p>
-            <p>Telepon: +62 812 3456 7890</p>
-        </section>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Confirm Wallet Address <span class="info-icon">i</span></h3>
+              <span class="check-icon">✔</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-
-    <footer>
-        <p>&copy; 2024 Rodcill. All rights reserved.</p>
-    </footer>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
