@@ -132,6 +132,41 @@
     .dropdown:hover {
       background-color: #1e272e;
     }
+
+    .custom-day {
+      position: relative;
+    }
+
+    .custom-day div {
+      position: absolute;
+      margin: 5px;
+    }
+
+    .custom-day .top-left {
+      top: 0;
+      left: 0;
+    }
+
+    .custom-day .top-right {
+      top: 0;
+      right: 0;
+    }
+
+    .custom-day .bottom-left {
+      bottom: 0;
+      left: 0;
+    }
+
+    .custom-day .bottom-right {
+      bottom: 0;
+      right: 0;
+    }
+
+    .custom-day .center {
+      position: static;
+      margin: 18px 0;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -183,15 +218,15 @@
 
           <div class="day"></div>
           <div class="day highlight">+ $0.01<br>Largest Gain</div>
+
+          <div class="day custom-day">
+            <div class="top-left">Selasa</div>
+            <div class="top-right">L15</div>
+            <div class="center harga-lime">+10.6%</div>
+            <div class="bottom-left">$51.00</div>
+            <div class="bottom-right harga-lime">+$5.40</div>
+          </div>
         </div>
-        <td>28</td>
-      <td class="custom-td" style="position: relative;">
-  <div style="position: absolute; top: 0; left: 0; margin: 5px;">Selasa</div>
-  <div style="position: absolute; top: 0; right: 0; margin: 5px;">L15</div>
-  <div class="harga-lime" style="align-self: center; margin: 18px;">+10.6%</div>
-  <div style="position: absolute; bottom: 0; left: 0; margin: 5px;">$51.00</div>
-  <div class="harga-lime" style="position: absolute; bottom: 0; right: 0; margin: 5px;">+$5.40</div>
-</td>
       </div>
     </div>
   </div>
