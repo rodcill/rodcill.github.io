@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grafik Candlestick OHLC</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.1.0"></script>
     <style>
         canvas {
             max-width: 600px;
@@ -36,12 +36,17 @@
                 datasets: [{
                     label: 'Candlestick OHLC',
                     data: data,
+                    color: {
+                        up: '#00ff00',
+                        down: '#ff0000'
+                    }
                 }]
             },
             options: {
                 responsive: true,
                 scales: {
                     x: {
+                        type: 'time',
                         title: {
                             display: true,
                             text: 'Tanggal'
