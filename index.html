@@ -17,16 +17,20 @@
     <h1>Candlestick Chart Example</h1>
     <canvas id="myChart"></canvas>
     <script>
+        // Mendapatkan konteks dari canvas
         const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Membuat grafik candlestick
         const myChart = new Chart(ctx, {
-            type: 'candlestick', // Ganti dengan 'bar' untuk grafik bar
+            type: 'candlestick',
             data: {
                 datasets: [{
                     label: 'Stock Prices',
                     data: [
                         { o: 30, h: 40, l: 20, c: 35, x: new Date('2021-01-01') },
                         { o: 35, h: 45, l: 30, c: 40, x: new Date('2021-01-02') },
-                        // Tambahkan data lainnya di sini
+                        { o: 40, h: 50, l: 35, c: 45, x: new Date('2021-01-03') },
+                        { o: 45, h: 55, l: 40, c: 50, x: new Date('2021-01-04') },
                     ]
                 }]
             },
