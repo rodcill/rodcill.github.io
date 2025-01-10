@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafik Candlestick OHLC</title>
+    <title>Candlestick Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
     <style>
         canvas {
             max-width: 600px;
@@ -15,50 +14,30 @@
     </style>
 </head>
 <body>
-    <h1>Grafik Candlestick Open-High-Low-Close (OHLC)</h1>
+    <h1>Candlestick Chart</h1>
     <canvas id="candlestickChart"></canvas>
     
     <script>
         const ctx = document.getElementById('candlestickChart').getContext('2d');
 
-        // Data untuk grafik candlestick
-        const data = [
-            { t: '2023-01-01', o: 150, h: 160, l: 145, c: 155 },
-            { t: '2023-01-02', o: 155, h: 165, l: 150, c: 160 },
-            { t: '2023-01-03', o: 160, h: 165, l: 155, c: 155 },
-            { t: '2023-01-04', o: 155, h: 170, l: 140, c: 145 },
-            { t: '2023-01-05', o: 145, h: 175, l: 140, c: 165 }
-        ];
+        const data = {
+            labels: ['2023-01-01', '2023-01-02', '2023-01-03'],
+            datasets: [{
+                label: 'Harga',
+                data: [150, 160, 155],
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+            }]
+        };
 
         const config = {
-            type: 'candlestick',
-            data: {
-                datasets: [{
-                    label: 'Candlestick OHLC',
-                    data: data,
-                    color: {
-                        up: '#00ff00', // Warna untuk candlestick naik
-                        down: '#ff0000' // Warna untuk candlestick turun
-                    }
-                }]
-            },
+            type: 'bar',
+            data: data,
             options: {
-                responsive: true,
                 scales: {
-                    x: {
-                        type: 'time',
-                        title: {
-                            display: true,
-                            text: 'Tanggal'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Harga'
-                        },
-                        beginAtZero: false
-                    }
+                    x: { title: { display: true, text: 'Tanggal' } },
+                    y: { title: { display: true, text: 'Harga' }, beginAtZero: true }
                 }
             }
         };
