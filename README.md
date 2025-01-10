@@ -5,7 +5,7 @@
 <div class="w3-container" style="padding:0px 0px" id="atas"></div>
 <div class="w3-container" style="padding:0px 0px" id="beranda"></div>
 
-# [Rodcill 金](https://rodcill.github.io)
+# [Rodcill 金仙人 ](https://rodcill.github.io)
 
 # Peta Pertumbuhan Equitas Akun 5068888 versi Rodcill v1
 
