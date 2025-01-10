@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafik Candlestick</title>
+    <title>Grafik Candlestick XAUUSD</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.1.0"></script>
     <style>
@@ -15,26 +15,26 @@
     </style>
 </head>
 <body>
-    <h1>Grafik Candlestick Perdagangan</h1>
+    <h1>Grafik Candlestick XAUUSD</h1>
     <canvas id="candlestickChart"></canvas>
     
     <script>
         const ctx = document.getElementById('candlestickChart').getContext('2d');
 
-        // Data untuk grafik candlestick
+        // Data untuk grafik candlestick XAUUSD
         const data = [
-            { t: '2023-01-01', o: 150, h: 160, l: 145, c: 155 },
-            { t: '2023-01-02', o: 155, h: 165, l: 150, c: 160 },
-            { t: '2023-01-03', o: 160, h: 165, l: 155, c: 155 },
-            { t: '2023-01-04', o: 155, h: 170, l: 140, c: 145 },
-            { t: '2023-01-05', o: 145, h: 175, l: 140, c: 165 }
+            { t: '2023-01-01', o: 1800, h: 1820, l: 1790, c: 1810 },
+            { t: '2023-01-02', o: 1810, h: 1830, l: 1805, c: 1825 },
+            { t: '2023-01-03', o: 1825, h: 1840, l: 1815, c: 1835 },
+            { t: '2023-01-04', o: 1835, h: 1850, l: 1820, c: 1840 },
+            { t: '2023-01-05', o: 1840, h: 1860, l: 1830, c: 1855 }
         ];
 
         const config = {
             type: 'candlestick',
             data: {
                 datasets: [{
-                    label: 'Candlestick',
+                    label: 'XAUUSD',
                     data: data,
                     color: {
                         up: '#00ff00', // Warna untuk candlestick naik
@@ -59,7 +59,7 @@
                     y: {
                         title: {
                             display: true,
-                            text: 'Harga'
+                            text: 'Harga (USD)'
                         },
                         beginAtZero: false
                     }
