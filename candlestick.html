@@ -3,71 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafik Candlestick XAUUSD</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.1.0"></script>
+    <title>Grafik XAUUSD TradingView</title>
     <style>
-        canvas {
-            max-width: 800px;
-            margin: auto;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #f3f3f3;
+        }
+        #tradingview-widget-container {
+            width: 800px;
+            height: 600px;
         }
     </style>
 </head>
 <body>
-    <h1>Grafik Candlestick XAUUSD</h1>
-    <canvas id="candlestickChart"></canvas>
-    
-    <script>
-        const ctx = document.getElementById('candlestickChart').getContext('2d');
+    <div id="tradingview-widget-container">
+        <div id="tradingview-widget"></div>
+    </div>
 
-        // Data untuk grafik candlestick XAUUSD
-        const data = [
-            { t: '2023-01-01', o: 1800, h: 1820, l: 1790, c: 1810 },
-            { t: '2023-01-02', o: 1810, h: 1830, l: 1805, c: 1825 },
-            { t: '2023-01-03', o: 1825, h: 1840, l: 1815, c: 1835 },
-            { t: '2023-01-04', o: 1835, h: 1850, l: 1820, c: 1840 },
-            { t: '2023-01-05', o: 1840, h: 1860, l: 1830, c: 1855 }
-        ];
-
-        const config = {
-            type: 'candlestick',
-            data: {
-                datasets: [{
-                    label: 'XAUUSD',
-                    data: data,
-                    color: {
-                        up: '#00ff00', // Warna untuk candlestick naik
-                        down: '#ff0000' // Warna untuk candlestick turun
-                    }
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        type: 'time',
-                        title: {
-                            display: true,
-                            text: 'Tanggal'
-                        },
-                        ticks: {
-                            autoSkip: true,
-                            maxTicksLimit: 10
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Harga (USD)'
-                        },
-                        beginAtZero: false
-                    }
-                }
-            }
-        };
-
-        const candlestickChart = new Chart(ctx, config);
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+        new TradingView.widget({
+            "width": 800,
+            "height": 600,
+            "symbol": "OANDA:XAUUSD",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview-widget"
+        });
     </script>
 </body>
 </html>
