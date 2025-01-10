@@ -6,20 +6,36 @@
     <title>Grafik XAUUSD TradingView</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
             background-color: #f3f3f3;
         }
+        h1 {
+            margin-bottom: 20px;
+        }
         #tradingview-widget-container {
-            width: 1000px; /* Anda dapat mengubah ukuran ini */
-            height: 600px; /* Anda dapat mengubah ukuran ini */
+            width: 1000px; /* Ukuran lebar widget */
+            height: 600px; /* Ukuran tinggi widget */
+        }
+        .description {
+            max-width: 800px;
+            margin: 0 20px;
+            text-align: center;
+            color: #555;
         }
     </style>
 </head>
 <body>
+    <h1>Grafik Perdagangan XAUUSD</h1>
+    <div class="description">
+        <p>Grafik ini menunjukkan harga emas (XAU) terhadap dolar AS (USD) menggunakan grafik candlestick. 
+        Anda dapat melihat berbagai indikator teknis untuk membantu analisis perdagangan Anda.</p>
+    </div>
     <div id="tradingview-widget-container">
         <div id="tradingview-widget"></div>
     </div>
@@ -39,12 +55,16 @@
             "enable_publishing": false, // Izinkan penerbitan (true/false)
             "allow_symbol_change": true, // Izinkan perubahan simbol (true/false)
             "container_id": "tradingview-widget", // ID elemen untuk widget
-            "hideideas": true, // Menyembunyikan ide perdagangan
+            "hideideas": false, // Menyembunyikan ide perdagangan
             "studies": [
-                "MACD", // Indikator yang ingin ditampilkan
-                "RSI"
+                "MACD", // Indikator MACD
+                "RSI" // Indikator RSI
             ],
-            "favorites": ["OANDA:XAUUSD", "OANDA:EURUSD"], // Simbol favorit
+            "favorites": ["OANDA:XAUUSD", "OANDA:EURUSD", "OANDA:GBPUSD"], // Simbol favorit
+            "news": ["headlines"], // Menampilkan berita terkait
+            "popup": true, // Mengizinkan pop-up berita
+            "hide_side_toolbar": false, // Menyembunyikan toolbar samping
+            "save_image": true // Mengizinkan pengguna menyimpan gambar grafik
         });
     </script>
 </body>
