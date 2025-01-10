@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candlestick Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <title>Grafik XAUUSD TradingView</title>
     <style>
-        canvas {
-            max-width: 800px;
-            margin: auto;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+        }
+        #tradingview-widget-container {
+            width: 800px;
+            height: 600px;
         }
     </style>
 </head>
 <body>
-    <h1>Candlestick Chart Example</h1>
-    <canvas id="myChart"></canvas>
-    <script>
-        // Mendapatkan konteks dari canvas
-        const ctx = document.getElementById('myChart').getContext('2d');
+    <div id="tradingview-widget-container">
+        <div id="tradingview-widget"></div>
+    </div>
 
-        // Membuat grafik candlestick
-        const myChart = new Chart(ctx, {
-            type: 'candlestick',
-            data: {
-                datasets: [{
-                    label: 'Stock Prices',
-                    data: [
-                        { o: 30, h: 40, l: 20, c: 35, x: new Date('2021-01-01') },
-                        { o: 35, h: 45, l: 30, c: 40, x: new Date('2021-01-02') },
-                        { o: 40, h: 50, l: 35, c: 45, x: new Date('2021-01-03') },
-                        { o: 45, h: 55, l: 40, c: 50, x: new Date('2021-01-04') },
-                    ]
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        type: 'time'
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+        new TradingView.widget({
+            "width": 800,
+            "height": 600,
+            "symbol": "OANDA:XAUUSD",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "light",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview-widget"
         });
     </script>
 </body>
