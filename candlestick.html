@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candlestick Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.2.0/dist/chartjs-chart-financial.umd.js"></script>
     <style>
         canvas {
-            max-width: 600px;
+            width: 600px;  /* Atur lebar canvas */
+            height: 400px; /* Atur tinggi canvas */
+            max-width: 100%; /* Responsif */
             margin: auto;
+            background-color: #f3f3f3; /* Warna latar belakang untuk melihat batas */
         }
     </style>
 </head>
@@ -20,33 +22,36 @@
     <script>
         const ctx = document.getElementById('candlestickChart').getContext('2d');
 
+        // Data dummy untuk candlestick chart
         const data = {
+            labels: ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04', '2023-01-05'],
             datasets: [{
-                label: 'Candlestick Data',
-                data: [
-                    { t: new Date('2023-01-01'), o: 150, h: 170, l: 140, c: 160 },
-                    { t: new Date('2023-01-02'), o: 160, h: 180, l: 150, c: 155 },
-                    { t: new Date('2023-01-03'), o: 155, h: 165, l: 140, c: 145 },
-                    { t: new Date('2023-01-04'), o: 145, h: 160, l: 130, c: 155 },
-                    { t: new Date('2023-01-05'), o: 155, h: 170, l: 150, c: 165 }
+                label: 'Price',
+                data: [150, 160, 155, 145, 165], // Hanya menggunakan data harga penutupan
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
                 ],
-                color: {
-                    up: 'green',
-                    down: 'red',
-                    unchanged: 'blue'
-                },
-                borderColor: 'black',
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
                 borderWidth: 1,
             }]
         };
 
         const config = {
-            type: 'candlestick',
+            type: 'bar', // Menggunakan grafik batang untuk percobaan
             data: data,
             options: {
                 scales: {
                     x: {
-                        type: 'time',
                         title: {
                             display: true,
                             text: 'Date'
