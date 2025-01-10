@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candlestick Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <style>
+        canvas {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Candlestick Chart</h1>
+    <canvas id="candlestickChart"></canvas>
+    
+    <script>
+        const ctx = document.getElementById('candlestickChart').getContext('2d');
+
+        const data = {
+            datasets: [{
+                label: 'Candlestick Data',
+                data: [
+                    { t: '2023-01-01', o: 150, h: 170, l: 140, c: 160 },
+                    { t: '2023-01-02', o: 160, h: 180, l: 150, c: 155 },
+                    { t: '2023-01-03', o: 155, h: 165, l: 140, c: 145 },
+                    { t: '2023-01-04', o: 145, h: 160, l: 130, c: 155 },
+                    { t: '2023-01-05', o: 155, h: 170, l: 150, c: 165 }
+                ],
+                color: {
+                    up: 'green',
+                    down: 'red',
+                    unchanged: 'blue'
+                },
+                borderColor: 'black',
+                borderWidth: 1,
+            }]
+        };
+
+        const config = {
+            type: 'candlestick',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price'
+                        }
+                    }
+                }
+            }
+        };
+
+        const candlestickChart = new Chart(ctx, config);
+    </script>
+</body>
+</html>
