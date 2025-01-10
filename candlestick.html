@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candlestick Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial@3.2.0/dist/chartjs-chart-financial.umd.js"></script>
     <style>
         canvas {
             max-width: 600px;
@@ -24,11 +24,11 @@
             datasets: [{
                 label: 'Candlestick Data',
                 data: [
-                    { t: '2023-01-01', o: 150, h: 170, l: 140, c: 160 },
-                    { t: '2023-01-02', o: 160, h: 180, l: 150, c: 155 },
-                    { t: '2023-01-03', o: 155, h: 165, l: 140, c: 145 },
-                    { t: '2023-01-04', o: 145, h: 160, l: 130, c: 155 },
-                    { t: '2023-01-05', o: 155, h: 170, l: 150, c: 165 }
+                    { t: new Date('2023-01-01'), o: 150, h: 170, l: 140, c: 160 },
+                    { t: new Date('2023-01-02'), o: 160, h: 180, l: 150, c: 155 },
+                    { t: new Date('2023-01-03'), o: 155, h: 165, l: 140, c: 145 },
+                    { t: new Date('2023-01-04'), o: 145, h: 160, l: 130, c: 155 },
+                    { t: new Date('2023-01-05'), o: 155, h: 170, l: 150, c: 165 }
                 ],
                 color: {
                     up: 'green',
