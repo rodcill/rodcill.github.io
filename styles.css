@@ -1,60 +1,7 @@
-/* styles.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-h1 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #444;
-  padding-bottom: 10px;
-}
-
-p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-thead th {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: left;
-}
-
-tbody tr {
-  border-bottom: 1px solid #444;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #222;
-}
-
-td, th {
-  padding: 10px;
-  text-align: center;
-}
-
-tbody td {
-  color: #ddd;
+canvas {
+    width: 600px;  /* Atur lebar canvas */
+    height: 400px; /* Atur tinggi canvas */
+    max-width: 100%; /* Responsif */
+    margin: auto;
+    background-color: #f3f3f3; /* Warna latar belakang untuk melihat batas */
 }
