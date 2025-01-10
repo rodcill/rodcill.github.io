@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Candlestick Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         canvas {
-            width: 600px;  /* Atur lebar canvas */
-            height: 400px; /* Atur tinggi canvas */
-            max-width: 100%; /* Responsif */
+            max-width: 600px;
             margin: auto;
-            background-color: #f3f3f3; /* Warna latar belakang untuk melihat batas */
+            background-color: #f3f3f3;
         }
     </style>
 </head>
@@ -22,37 +20,24 @@
     <script>
         const ctx = document.getElementById('candlestickChart').getContext('2d');
 
-        // Data dummy untuk grafik batang
         const data = {
-            labels: ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04', '2023-01-05'],
+            labels: ['2023-01-01', '2023-01-02', '2023-01-03'],
             datasets: [{
                 label: 'Harga',
-                data: [150, 160, 155, 145, 165], // Data harga penutupan
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', // Warna batang
-                borderColor: 'rgba(75, 192, 192, 1)', // Warna garis tepi batang
+                data: [150, 160, 155],
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1,
             }]
         };
 
         const config = {
-            type: 'bar', // Menggunakan grafik batang
+            type: 'bar',
             data: data,
             options: {
-                responsive: true,
                 scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Tanggal'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Harga'
-                        },
-                        beginAtZero: true // Memulai sumbu Y dari nol
-                    }
+                    x: { title: { display: true, text: 'Tanggal' } },
+                    y: { title: { display: true, text: 'Harga' }, beginAtZero: true }
                 }
             }
         };
