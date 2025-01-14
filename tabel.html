@@ -62,9 +62,9 @@
                 <tr>
                     <th>Transaksi</th>
                     <th>Modal Awal ($)</th>
+                    <th>Volume</th>
                     <th>Keuntungan ($)</th>
                     <th>Modal Akhir ($)</th>
-                    <th>Volume</th>
                     <th>Target Poin</th>
                 </tr>
             </thead>
@@ -82,17 +82,17 @@
     <script>
         // Data untuk tabel
         const data = [
-            {transaksi: 1, modalAwal: 0.40, keuntungan: 0.40, modalAkhir: 0.80, volume: 0.01, targetPoin: 4000},
-            {transaksi: 2, modalAwal: 0.80, keuntungan: 0.80, modalAkhir: 1.60, volume: 0.02, targetPoin: 4000},
-            {transaksi: 3, modalAwal: 1.60, keuntungan: 1.60, modalAkhir: 3.20, volume: 0.04, targetPoin: 4000},
-            {transaksi: 4, modalAwal: 3.20, keuntungan: 3.20, modalAkhir: 6.40, volume: 0.08, targetPoin: 4000},
-            {transaksi: 5, modalAwal: 6.40, keuntungan: 6.40, modalAkhir: 12.80, volume: 0.16, targetPoin: 4000},
-            {transaksi: 6, modalAwal: 12.80, keuntungan: 12.80, modalAkhir: 25.60, volume: 0.32, targetPoin: 4000},
-            {transaksi: 7, modalAwal: 25.60, keuntungan: 25.60, modalAkhir: 51.20, volume: 0.64, targetPoin: 4000},
-            {transaksi: 8, modalAwal: 51.20, keuntungan: 51.20, modalAkhir: 102.40, volume: 1.28, targetPoin: 4000},
-            {transaksi: 9, modalAwal: 102.40, keuntungan: 102.40, modalAkhir: 204.80, volume: 2.56, targetPoin: 4000},
-            {transaksi: 10, modalAwal: 204.80, keuntungan: 204.80, modalAkhir: 409.60, volume: 5.12, targetPoin: 4000},
-            {transaksi: 11, modalAwal: 409.60, keuntungan: 400.00, modalAkhir: 809.60, volume: 10.00, targetPoin: 4000}
+            {transaksi: 1, modalAwal: 0.40, volume: 0.01, keuntungan: 0.40, modalAkhir: 0.80, targetPoin: 4000},
+            {transaksi: 2, modalAwal: 0.80, volume: 0.02, keuntungan: 0.80, modalAkhir: 1.60, targetPoin: 4000},
+            {transaksi: 3, modalAwal: 1.60, volume: 0.04, keuntungan: 1.60, modalAkhir: 3.20, targetPoin: 4000},
+            {transaksi: 4, modalAwal: 3.20, volume: 0.08, keuntungan: 3.20, modalAkhir: 6.40, targetPoin: 4000},
+            {transaksi: 5, modalAwal: 6.40, volume: 0.16, keuntungan: 6.40, modalAkhir: 12.80, targetPoin: 4000},
+            {transaksi: 6, modalAwal: 12.80, volume: 0.32, keuntungan: 12.80, modalAkhir: 25.60, targetPoin: 4000},
+            {transaksi: 7, modalAwal: 25.60, volume: 0.64, keuntungan: 25.60, modalAkhir: 51.20, targetPoin: 4000},
+            {transaksi: 8, modalAwal: 51.20, volume: 1.28, keuntungan: 51.20, modalAkhir: 102.40, targetPoin: 4000},
+            {transaksi: 9, modalAwal: 102.40, volume: 2.56, keuntungan: 102.40, modalAkhir: 204.80, targetPoin: 4000},
+            {transaksi: 10, modalAwal: 204.80, volume: 5.12, keuntungan: 204.80, modalAkhir: 409.60, targetPoin: 4000},
+            {transaksi: 11, modalAwal: 409.60, volume: 10.00, keuntungan: 400.00, modalAkhir: 809.60, targetPoin: 4000}
         ];
 
         // Fungsi untuk membuat tabel dari data
