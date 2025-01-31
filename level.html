@@ -1,3 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Keuntungan 100% per Transaksi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+            }
+            td {
+                /* Behave like a "row" */
+                border: none;
+                border-bottom: 1px solid #ddd;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+            td:nth-of-type(1):before { content: "Transaksi"; }
+            td:nth-of-type(2):before { content: "Modal Awal ($)"; }
+            td:nth-of-type(3):before { content: "Volume"; }
+            td:nth-of-type(4):before { content: "Keuntungan ($)"; }
+            td:nth-of-type(5):before { content: "Modal Akhir ($)"; }
+            td:nth-of-type(6):before { content: "Target Poin"; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulasi Keuntungan 100% per Transaksi</h1>
+        <p>Jika modal awal sebesar $0.40 dan setiap transaksi memberikan keuntungan 100% (di mana modal berlipat ganda setelah setiap transaksi), berikut adalah tabel pertumbuhannya:</p>
+
 <table>
         <!-- Judul tabel -->
         <caption>Peta Pertumbuhan Equitas Akun 5068888</caption>
@@ -1048,8 +1151,3 @@
             </tr>
         </tbody>
     </table>
-
-<div id="app">
-  <button class="copy-btn" onclick="document.getElementById('back-to-top').click()">Verified</button>
-  <a href="#atas" id="back-to-top" class="w3-bar-item w3-button" style="display:none;"> Ke Atas Halaman</a>
-</div>
