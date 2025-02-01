@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Saya</title>
+</head>
+<body>
+    <h1>Halo, Saya Rodcill</h1>
+    <div id="data-container"></div>
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                let content = `<p>Nama: ${data.nama}</p>`;
+                content += '<p>Proyek:</p><ul>';
+                data.proyek.forEach(proj => {
+                    content += `<li>${proj}</li>`;
+                });
+                content += '</ul>';
+                document.getElementById('data-container').innerHTML = content;
+            });
+    </script>
+</body>
+</html>
