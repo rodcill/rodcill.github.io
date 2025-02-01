@@ -1,97 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Crack Info</title>
+    <title>Simulasi Keuntungan 10% /Hari</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
             padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
-            color: #fe5e49;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+            text-align: center;
+            color: #2c3e50;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
         th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
         }
         th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+            }
+            td {
+                /* Behave like a "row" */
+                border: none;
+                border-bottom: 1px solid #ddd;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+            }
+            td:nth-of-type(1):before { content: "Level"; }
+            td:nth-of-type(2):before { content: "Saldo Awal Perdagangan"; }
+            td:nth-of-type(3):before { content: "Volume Order"; }
+            td:nth-of-type(4):before { content: "Target Laba/Rugi"; }
+            td:nth-of-type(5):before { content: "Jika Untung"; }
+            td:nth-of-type(6):before { content: "Jika Rugi"; }
+            td:nth-of-type(7):before { content: "Saldo Level Selanjutnya"; }
         }
     </style>
 </head>
 <body>
-    <h1>JSON Crack</h1>
-    <div id="info-container"></div>
-    <table id="milestones-table"></table>
+    <div class="container">
+        <h1 id="title"></h1>
+        <p id="description"></p>
+
+        <table id="myTable">
+            <caption id="caption"></caption>
+        </table>
+    </div>
 
     <script>
         fetch('data.json')
             .then(response => response.json())
             .then(jsonData => {
-                let content = `<p><strong>App Name:</strong> ${jsonData.appName}</p>`;
-                content += `<p><strong>Author:</strong> ${jsonData.author}</p>`;
-                content += `<p><strong>Launched:</strong> ${jsonData.launched}</p>`;
-                content += `<p><strong>Open Source:</strong> ${jsonData.openSource ? 'Yes' : 'No'}</p>`;
-                content += `<p><strong>Stars:</strong> ${jsonData.stars}</p>`;
-                content += `<h2>Upgrade</h2>`;
-                content += `<p><strong>App Name:</strong> ${jsonData.upgrade.appName}</p>`;
-                content += `<p><strong>Detail:</strong> ${jsonData.upgrade.detail}</p>`;
-                content += `<p><strong>Website:</strong> <a href="${jsonData.upgrade.website}" target="_blank">${jsonData.upgrade.website}</a></p>`;
-                content += `<p><strong>Paid:</strong> ${jsonData.upgrade.paid ? 'Yes' : 'No'}</p>`;
-                content += `<h2>Social</h2>`;
-                content += '<ul>';
-                for (const [platform, link] of Object.entries(jsonData.social)) {
-                    content += `<li><strong>${platform.charAt(0).toUpperCase() + platform.slice(1)}:</strong> <a href="${link}" target="_blank">${link}</a></li>`;
-                }
-                content += '</ul>';
-                content += `<h2>Images</h2>`;
-                content += '<ul>';
-                jsonData.images.forEach(img => {
-                    content += `<li><img src="${img}" alt="Image" style="max-width: 100px;"></li>`;
-                });
-                content += '</ul>';
+                document.getElementById('title').innerText = jsonData.title;
+                document.getElementById('description').innerText = jsonData.description;
+                document.getElementById('caption').innerText = jsonData.caption;
 
-                document.getElementById('info-container').innerHTML = content;
-
-                // Menambahkan tabel
-                const table = document.getElementById('milestones-table');
-                let tableHTML = '<thead><tr>';
-                jsonData.tableData.headers.forEach(header => {
-                    tableHTML += `<th>${header}</th>`;
+                let tableHeader = '<thead><tr>';
+                jsonData.headers.forEach(header => {
+                    tableHeader += `<th>${header}</th>`;
                 });
-                tableHTML += '</tr></thead><tbody>';
-                jsonData.tableData.rows.forEach(row => {
-                    tableHTML += '<tr>';
-                    jsonData.tableData.headers.forEach(header => {
-                        tableHTML += `<td>${row[header]}</td>`;
+                tableHeader += '</tr></thead>';
+
+                let tableBody = '<tbody>';
+                jsonData.data.forEach(row => {
+                    tableBody += '<tr>';
+                    jsonData.headers.forEach(header => {
+                        tableBody += `<td>${row[header]}</td>`;
                     });
-                    tableHTML += '</tr>';
+                    tableBody += '</tr>';
                 });
-                tableHTML += '</tbody>';
-                table.innerHTML = tableHTML;
+                tableBody += '</tbody>';
+
+                document.getElementById('myTable').innerHTML = tableHeader + tableBody;
             });
     </script>
 </body>
