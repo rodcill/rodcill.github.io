@@ -14,7 +14,6 @@
   "data": [
     {"Level": 85, "Saldo Awal Perdagangan": "$15,150.0", "Volume Order": 13.00, "Target Laba/Rugi": "$1,300.00", "Jika Untung": "$16,450.00", "Jika Rugi": "$13,850.00", "Saldo Level Selanjutnya": "$16,450.00"},
     {"Level": 84, "Saldo Awal Perdagangan": "$13,950.0", "Volume Order": 12.00, "Target Laba/Rugi": "$1,200.00", "Jika Untung": "$15,150.00", "Jika Rugi": "$12,750.00", "Saldo Level Selanjutnya": "$15,150.00"},
-    // ... (Tambahkan semua baris data sesuai dengan tabel HTML Anda)
     {"Level": -17, "Saldo Awal Perdagangan": "$0.00", "Volume Order": 0.01, "Target Laba/Rugi": "$0.00", "Jika Untung": "$0.00", "Jika Rugi": "$0.00", "Saldo Level Selanjutnya": "$0.00"}
   ]
 }
