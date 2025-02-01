@@ -1,49 +1,20 @@
 {
-  "appName": "JSON Crack",
-  "author": "Aykut Saraç",
-  "launched": 2022,
-  "openSource": true,
-  "stars": 34633,
-  "upgrade": {
-    "appName": "ToDiagram",
-    "detail": "New powerful JSON editor.",
-    "website": "https://todiagram.com",
-    "brandColor": "#fe5e49",
-    "paid": true
-  },
-  "milestones": [
-    {
-      "title": "Launch",
-      "year": 2022
-    },
-    {
-      "title": "10K Stars",
-      "date": "2022"
-    },
-    {
-      "title": "20K Stars",
-      "date": "2023"
-    },
-    {
-      "title": "30K Stars",
-      "date": "2024"
-    }
+  "title": "Simulasi Keuntungan 10% /Hari",
+  "description": "Jika modal awal sebesar $1.00 dan setiap hari memberikan keuntungan 10% (di mana modal bertambah setelah setiap transaksi), berikut adalah tabel pertumbuhannya:",
+  "caption": "Peta Pertumbuhan Equitas Akun 5068888",
+  "headers": [
+    "Level",
+    "Saldo Awal Perdagangan",
+    "Volume Order",
+    "Target Laba/Rugi",
+    "Jika Untung",
+    "Jika Rugi",
+    "Saldo Level Selanjutnya"
   ],
-  "social": {
-    "github": "https://github.com/AykutSarac/jsoncrack.com",
-    "twitter": "https://x.com/jsoncrack",
-    "linkedin": "https://linkedin.com/company/todiagram"
-  },
-  "images": [
-    "https://jsoncrack.com/assets/192.png"
-  ],
-  "tableData": {
-    "headers": ["Title", "Year/Date"],
-    "rows": [
-      {"Title": "Launch", "Year/Date": 2022},
-      {"Title": "10K Stars", "Year/Date": "2022"},
-      {"Title": "20K Stars", "Year/Date": "2023"},
-      {"Title": "30K Stars", "Year/Date": "2024"}
-    ]
-  }
+  "data": [
+    {"Level": 85, "Saldo Awal Perdagangan": "$15,150.0", "Volume Order": 13.00, "Target Laba/Rugi": "$1,300.00", "Jika Untung": "$16,450.00", "Jika Rugi": "$13,850.00", "Saldo Level Selanjutnya": "$16,450.00"},
+    {"Level": 84, "Saldo Awal Perdagangan": "$13,950.0", "Volume Order": 12.00, "Target Laba/Rugi": "$1,200.00", "Jika Untung": "$15,150.00", "Jika Rugi": "$12,750.00", "Saldo Level Selanjutnya": "$15,150.00"},
+    // ... (Tambahkan semua baris data sesuai dengan tabel HTML Anda)
+    {"Level": -17, "Saldo Awal Perdagangan": "$0.00", "Volume Order": 0.01, "Target Laba/Rugi": "$0.00", "Jika Untung": "$0.00", "Jika Rugi": "$0.00", "Saldo Level Selanjutnya": "$0.00"}
+  ]
 }
