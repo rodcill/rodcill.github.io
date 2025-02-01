@@ -3,71 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulasi Keuntungan 10% /Hari</title>
+    <title>UI Dasar</title>
     <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
+        /* CSS Dasar untuk UI */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-        th, td {
-            padding: 5px;
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1 id="title"></h1>
-    <p id="description"></p>
-    <table id="myTable">
-        <caption id="caption"></caption>
-        <thead>
-            <tr id="headerRow"></tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
+    <header>
+        <h1>UI Dasar</h1>
+    </header>
 
-    <script>
-        const jsonData = {
-            "title": "Simulasi Keuntungan 10% /Hari",
-            "description": "Jika modal awal sebesar $1.00 dan setiap hari memberikan keuntungan 10% (di mana modal bertambah setelah setiap transaksi), berikut adalah tabel pertumbuhannya:",
-            "caption": "Peta Pertumbuhan Equitas Akun 5068888",
-            "headers": [
-                "Level",
-                "Saldo Awal Perdagangan",
-                "Volume Order",
-                "Target Laba/Rugi",
-                "Jika Untung",
-                "Jika Rugi",
-                "Saldo Level Selanjutnya"
-            ],
-            "data": [
-                {"Level": 85, "Saldo Awal Perdagangan": "$15,150.0", "Volume Order": 13.00, "Target Laba/Rugi": "$1,300.00", "Jika Untung": "$16,450.00", "Jika Rugi": "$13,850.00", "Saldo Level Selanjutnya": "$16,450.00"},
-                {"Level": 84, "Saldo Awal Perdagangan": "$13,950.0", "Volume Order": 12.00, "Target Laba/Rugi": "$1,200.00", "Jika Untung": "$15,150.00", "Jika Rugi": "$12,750.00", "Saldo Level Selanjutnya": "$15,150.00"},
-                // ... (Hanya dua baris data yang ditampilkan untuk kesederhanaan)
-                {"Level": -17, "Saldo Awal Perdagangan": "$0.00", "Volume Order": 0.01, "Target Laba/Rugi": "$0.00", "Jika Untung": "$0.00", "Jika Rugi": "$0.00", "Saldo Level Selanjutnya": "$0.00"}
-            ]
-        };
-
-        document.getElementById('title').innerText = jsonData.title;
-        document.getElementById('description').innerText = jsonData.description;
-        document.getElementById('caption').innerText = jsonData.caption;
-
-        // Menambahkan header tabel
-        let headerHTML = '';
-        jsonData.headers.forEach(header => {
-            headerHTML += `<th>${header}</th>`;
-        });
-        document.getElementById('headerRow').innerHTML = headerHTML;
-
-        // Menambahkan data tabel
-        let bodyHTML = '';
-        jsonData.data.forEach(row => {
-            bodyHTML += '<tr>';
-            jsonData.headers.forEach(header => {
-                bodyHTML += `<td>${row[header]}</td>`;
-            });
-            bodyHTML += '</tr>';
-        });
-        document.getElementById('tableBody').innerHTML = bodyHTML;
-    </script>
+    <div class="container">
+        <h2>Selamat Datang</h2>
+        <p>Ini adalah contoh UI sederhana menggunakan HTML dan CSS.</p>
+        
+        <button class="button">Klik Saya</button>
+        
+        <form>
+            <label for="nama">Nama:</label><br>
+            <input type="text" id="nama" name="nama"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <input type="submit" value="Submit" class="button">
+        </form>
+    </div>
 </body>
 </html>
