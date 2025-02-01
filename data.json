@@ -1,22 +1,49 @@
 {
-  "tabel": {
-    "header": ["Nama", "Usia", "Kota"],
-    "data": [
-      {
-        "Nama": "Budi",
-        "Usia": 25,
-        "Kota": "Jakarta"
-      },
-      {
-        "Nama": "Ani",
-        "Usia": 30,
-        "Kota": "Bandung"
-      },
-      {
-        "Nama": "Rudi",
-        "Usia": 22,
-        "Kota": "Surabaya"
-      }
+  "appName": "JSON Crack",
+  "author": "Aykut Saraç",
+  "launched": 2022,
+  "openSource": true,
+  "stars": 34633,
+  "upgrade": {
+    "appName": "ToDiagram",
+    "detail": "New powerful JSON editor.",
+    "website": "https://todiagram.com",
+    "brandColor": "#fe5e49",
+    "paid": true
+  },
+  "milestones": [
+    {
+      "title": "Launch",
+      "year": 2022
+    },
+    {
+      "title": "10K Stars",
+      "date": "2022"
+    },
+    {
+      "title": "20K Stars",
+      "date": "2023"
+    },
+    {
+      "title": "30K Stars",
+      "date": "2024"
+    }
+  ],
+  "social": {
+    "github": "https://github.com/AykutSarac/jsoncrack.com",
+    "twitter": "https://x.com/jsoncrack",
+    "linkedin": "https://linkedin.com/company/todiagram"
+  },
+  "images": [
+    "https://jsoncrack.com/assets/192.png"
+  ],
+  "tableData": {
+    "headers": ["Title", "Year/Date"],
+    "rows": [
+      {"Title": "Launch", "Year/Date": 2022},
+      {"Title": "10K Stars", "Year/Date": "2022"},
+      {"Title": "20K Stars", "Year/Date": "2023"},
+      {"Title": "30K Stars", "Year/Date": "2024"}
     ]
   }
 }
