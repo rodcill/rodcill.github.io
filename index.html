@@ -5,134 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Keuntungan 10% /Hari</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        table {
-            width: 100%;
+        table, th, td {
+            border: 1px solid black;
             border-collapse: collapse;
-            margin-top: 20px;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        .warning {
-            background-color: #e74c3c;
-            color: white;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            tr {
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
-            td {
-                /* Behave like a "row" */
-                border: none;
-                border-bottom: 1px solid #ddd;
-                position: relative;
-                padding-left: 50%;
-            }
-            td:before {
-                /* Now like a table header */
-                position: absolute;
-                /* Top/left values mimic padding */
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                content: attr(data-label);
-                font-weight: bold;
-            }
-            td:nth-of-type(1):before { content: "Level"; }
-            td:nth-of-type(2):before { content: "Saldo Awal Perdagangan"; }
-            td:nth-of-type(3):before { content: "Volume Order"; }
-            td:nth-of-type(4):before { content: "Target Laba/Rugi"; }
-            td:nth-of-type(5):before { content: "Jika Untung"; }
-            td:nth-of-type(6):before { content: "Jika Rugi"; }
-            td:nth-of-type(7):before { content: "Saldo Level Selanjutnya"; }
+            padding: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 id="title"></h1>
-        <p id="description"></p>
-
-        <table id="myTable">
-            <caption id="caption"></caption>
-        </table>
-    </div>
+    <h1 id="title"></h1>
+    <p id="description"></p>
+    <table id="myTable">
+        <caption id="caption"></caption>
+        <thead>
+            <tr id="headerRow"></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
 
     <script>
-        fetch('data.json')
-            .then(response => response.json())
-            .then(jsonData => {
-                document.getElementById('title').innerText = jsonData.title;
-                document.getElementById('description').innerText = jsonData.description;
-                document.getElementById('caption').innerText = jsonData.caption;
+        const jsonData = {
+            "title": "Simulasi Keuntungan 10% /Hari",
+            "description": "Jika modal awal sebesar $1.00 dan setiap hari memberikan keuntungan 10% (di mana modal bertambah setelah setiap transaksi), berikut adalah tabel pertumbuhannya:",
+            "caption": "Peta Pertumbuhan Equitas Akun 5068888",
+            "headers": [
+                "Level",
+                "Saldo Awal Perdagangan",
+                "Volume Order",
+                "Target Laba/Rugi",
+                "Jika Untung",
+                "Jika Rugi",
+                "Saldo Level Selanjutnya"
+            ],
+            "data": [
+                {"Level": 85, "Saldo Awal Perdagangan": "$15,150.0", "Volume Order": 13.00, "Target Laba/Rugi": "$1,300.00", "Jika Untung": "$16,450.00", "Jika Rugi": "$13,850.00", "Saldo Level Selanjutnya": "$16,450.00"},
+                {"Level": 84, "Saldo Awal Perdagangan": "$13,950.0", "Volume Order": 12.00, "Target Laba/Rugi": "$1,200.00", "Jika Untung": "$15,150.00", "Jika Rugi": "$12,750.00", "Saldo Level Selanjutnya": "$15,150.00"},
+                // ... (Hanya dua baris data yang ditampilkan untuk kesederhanaan)
+                {"Level": -17, "Saldo Awal Perdagangan": "$0.00", "Volume Order": 0.01, "Target Laba/Rugi": "$0.00", "Jika Untung": "$0.00", "Jika Rugi": "$0.00", "Saldo Level Selanjutnya": "$0.00"}
+            ]
+        };
 
-                let tableHeader = '<thead><tr>';
-                jsonData.headers.forEach(header => {
-                    tableHeader += `<th>${header}</th>`;
-                });
-                tableHeader += '</tr></thead>';
+        document.getElementById('title').innerText = jsonData.title;
+        document.getElementById('description').innerText = jsonData.description;
+        document.getElementById('caption').innerText = jsonData.caption;
 
-                let tableBody = '<tbody>';
-                jsonData.data.forEach(row => {
-                    tableBody += '<tr>';
-                    jsonData.headers.forEach(header => {
-                        tableBody += `<td>${row[header]}</td>`;
-                    });
-                    tableBody += '</tr>';
-                });
-                tableBody += '</tbody>';
+        // Menambahkan header tabel
+        let headerHTML = '';
+        jsonData.headers.forEach(header => {
+            headerHTML += `<th>${header}</th>`;
+        });
+        document.getElementById('headerRow').innerHTML = headerHTML;
 
-                document.getElementById('myTable').innerHTML = tableHeader + tableBody;
+        // Menambahkan data tabel
+        let bodyHTML = '';
+        jsonData.data.forEach(row => {
+            bodyHTML += '<tr>';
+            jsonData.headers.forEach(header => {
+                bodyHTML += `<td>${row[header]}</td>`;
             });
+            bodyHTML += '</tr>';
+        });
+        document.getElementById('tableBody').innerHTML = bodyHTML;
     </script>
 </body>
 </html>
