@@ -6,12 +6,29 @@
     <title>Simulasi Keuntungan 100% per Transaksi</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             color: #333;
-            margin: 0;
-            padding: 20px;
             line-height: 1.6;
+        }
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-45deg);
+            opacity: 0.2;
+            z-index: 1000;
+            pointer-events: none;
+            font-size: 100px;
+            color: red;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .container {
             max-width: 800px;
@@ -20,6 +37,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1001; /* Pastikan konten di atas watermark */
         }
         h1 {
             text-align: center;
@@ -69,16 +88,13 @@
                 border: 1px solid #ddd;
             }
             td {
-                /* Behave like a "row" */
                 border: none;
                 border-bottom: 1px solid #ddd;
                 position: relative;
                 padding-left: 50%;
             }
             td:before {
-                /* Now like a table header */
                 position: absolute;
-                /* Top/left values mimic padding */
                 top: 6px;
                 left: 6px;
                 width: 45%;
@@ -97,6 +113,7 @@
     </style>
 </head>
 <body>
+    <div class="watermark">Rodcill</div>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
         <p>Jika modal awal sebesar $0.40 dan setiap transaksi memberikan keuntungan 100% (di mana modal berlipat ganda setelah setiap transaksi), berikut adalah tabel pertumbuhannya:</p>
