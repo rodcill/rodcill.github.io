@@ -12,21 +12,6 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
-            position: relative;
-            overflow: hidden;
-        }
-        .watermark {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            opacity: 0.15;
-            z-index: 10;
-            pointer-events: none;
-            font-size: 15vw;
-            color: rgba(255, 0, 0, 0.5);
-            text-align: center;
-            white-space: nowrap;
         }
         .container {
             max-width: 800px;
@@ -35,8 +20,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 20;
         }
         h1 {
             text-align: center;
@@ -67,52 +50,12 @@
             border-radius: 5px;
             text-align: center;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-            thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            tr {
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-            }
-            td {
-                border: none;
-                border-bottom: 1px solid #ddd;
-                position: relative;
-                padding-left: 50%;
-            }
-            td:before {
-                position: absolute;
-                top: 6px;
-                left: 6px;
-                width: 45%;
-                padding-right: 10px;
-                white-space: nowrap;
-                content: attr(data-label);
-                font-weight: bold;
-            }
-            td:nth-of-type(1):before { content: "Transaksi"; }
-            td:nth-of-type(2):before { content: "Modal Awal ($)"; }
-            td:nth-of-type(3):before { content: "Volume"; }
-            td:nth-of-type(4):before { content: "Keuntungan ($)"; }
-            td:nth-of-type(5):before { content: "Modal Akhir ($)"; }
-            td:nth-of-type(6):before { content: "Target Poin"; }
-        }
     </style>
 </head>
 <body>
-    <div class="watermark">Rodcill</div>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
-        <p>Jika modal awal sebesar $0.40 dan setiap transaksi memberikan keuntungan 100% (di mana modal berlipat ganda setelah setiap transaksi), berikut adalah tabel pertumbuhannya:</p>
+        <p>Jika modal awal sebesar $0.40 dan setiap transaksi memberikan keuntungan 100%, berikut adalah tabel pertumbuhannya:</p>
 
         <table id="growthTable">
             <thead>
@@ -132,7 +75,7 @@
 
         <div class="warning">
             <strong>Hati-hati ketika order menjelang pergantian H4</strong>
-            <p>Pada jam 17:00 WIB (Waktu Indonesia Barat) adalah penutupan harga inti ETHUSD H4 yang bertepatan dengan jam 12:00 WBT (Waktu Broker Tickmill)</p>
+            <p>Pada jam 17:00 WIB adalah penutupan harga inti ETHUSD H4.</p>
         </div>
     </div>
 
