@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Keuntungan 100% per Transaksi</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simulasi Keuntungan 100% per Transaksi</h1>
+        <p>Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, artinya setiap kali Anda melakukan transaksi, modal awal Anda akan berlipat ganda. Dengan kata lain, setelah transaksi pertama, modal awal $0.50 akan menjadi $1.00, setelah transaksi kedua menjadi $2.00, dan seterusnya. Proses ini menunjukkan bagaimana modal Anda berkembang secara eksponensial dari satu transaksi ke transaksi berikutnya. Berikut adalah tabel yang menunjukkan detail pertumbuhan modal dari transaksi ke transaksi:</p>
+
+        <table id="growthTable">
+            <thead>
+                <tr>
+                    <th>Transaksi</th>
+                    <th>Modal Awal ($)</th>
+                    <th>Volume</th>
+                    <th>Keuntungan ($)</th>
+                    <th>Modal Akhir ($)</th>
+                    <th>Target Poin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data Rows will be inserted here -->
+            </tbody>
+        </table>
+
+        <div class="warning">
+            <strong>Hati-hati ketika order menjelang pergantian H4</strong>
+            <p>Pada jam 17:00 WIB adalah penutupan harga inti ETHUSD H4.</p>
+        </div>
+    </div>
+
+    <script>
+       const data = [
+    {transaksi: 1, modalAwal: 0.50, volume: 0.01, keuntungan: 0.50, modalAkhir: 1.00, targetPoin: 5000},
+    {transaksi: 2, modalAwal: 1.00, volume: 0.02, keuntungan: 1.00, modalAkhir: 2.00, targetPoin: 5000},
+    {transaksi: 3, modalAwal: 2.00, volume: 0.04, keuntungan: 2.00, modalAkhir: 4.00, targetPoin: 5000},
+    {transaksi: 4, modalAwal: 4.00, volume: 0.08, keuntungan: 4.00, modalAkhir: 8.00, targetPoin: 5000},
+    {transaksi: 5, modalAwal: 8.00, volume: 0.16, keuntungan: 8.00, modalAkhir: 16.00, targetPoin: 5000},
+    {transaksi: 6, modalAwal: 16.00, volume: 0.32, keuntungan: 16.00, modalAkhir: 32.00, targetPoin: 5000},
+    {transaksi: 7, modalAwal: 32.00, volume: 0.64, keuntungan: 32.00, modalAkhir: 64.00, targetPoin: 5000},
+    {transaksi: 8, modalAwal: 64.00, volume: 1.28, keuntungan: 64.00, modalAkhir: 128.00, targetPoin: 5000},
+    {transaksi: 9, modalAwal: 128.00, volume: 2.56, keuntungan: 128.00, modalAkhir: 256.00, targetPoin: 5000},
+    {transaksi: 10, modalAwal: 256.00, volume: 5.12, keuntungan: 256.00, modalAkhir: 512.00, targetPoin: 5000},
+    {transaksi: 11, modalAwal: 512.00, volume: 10.24, keuntungan: 512.00, modalAkhir: 1024.00, targetPoin: 5000}
+];
+
+        function populateTable() {
+            const tableBody = document.querySelector("#growthTable tbody");
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.transaksi}</td>
+                    <td>${row.modalAwal.toFixed(2)}</td>
+                    <td>${row.volume.toFixed(2)}</td>
+                    <td>${row.keuntungan.toFixed(2)}</td>
+                    <td>${row.modalAkhir.toFixed(2)}</td>
+                    <td>${row.targetPoin}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        window.onload = populateTable;
+    </script>
+</body>
+</html>
