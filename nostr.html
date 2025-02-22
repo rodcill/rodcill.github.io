@@ -49,9 +49,9 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px; /* Memperluas lebar maksimum untuk lebih banyak ruang kosong */
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 30px 40px; /* Meningkatkan padding untuk lebih banyak ruang di sisi kiri/kanan */
         }
 
         .content {
@@ -123,6 +123,13 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 900px;
+                padding: 30px 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 font-size: 1.2em;
@@ -135,7 +142,7 @@
             }
 
             .container {
-                padding: 20px 10px;
+                padding: 20px 15px; /* Mengurangi padding di layar kecil */
             }
 
             .section-title {
