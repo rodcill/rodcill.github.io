@@ -12,30 +12,34 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #1a1a1a;
             color: #fff;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 16px;
         }
 
         header {
             background-color: #4a148c;
-            padding: 20px;
+            padding: 20px 0;
             text-align: center;
             color: #fff;
+            font-size: 1.5em;
         }
 
         nav {
             background-color: #333;
-            padding: 15px;
+            padding: 10px 0;
             text-align: center;
+            border-bottom: 1px solid #4a4a4a;
         }
 
         nav a {
             color: #b0b0b0;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.1em;
+            font-size: 1em;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
@@ -44,34 +48,44 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
+        }
+
+        .content {
+            margin-top: 20px;
         }
 
         .section-title {
             color: #bb86fc;
-            margin: 20px 0;
-            font-size: 1.5em;
-        }
-
-        .content {
-            margin: 20px 0;
+            margin: 25px 0 15px;
+            font-size: 1.3em;
+            font-weight: 600;
         }
 
         .content p {
             margin-bottom: 15px;
             color: #e0e0e0;
+            font-size: 1em;
         }
 
         .checkmark {
             color: #4CAF50;
-            margin-right: 10px;
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+
+        .heart {
+            color: #bb86fc;
+            margin-right: 8px;
+            font-size: 1.1em;
         }
 
         .link {
             color: #bb86fc;
             text-decoration: none;
+            font-weight: 500;
         }
 
         .link:hover {
@@ -80,12 +94,40 @@
 
         footer {
             text-align: center;
-            padding: 10px;
+            padding: 10px 0;
             background-color: #333;
-            position: fixed;
+            color: #b0b0b0;
+            font-size: 0.9em;
+            position: relative;
             bottom: 0;
             width: 100%;
-            color: #b0b0b0;
+        }
+
+        /* Menambahkan styling untuk elemen tambahan */
+        .bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4a148c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Simulasi ikon menggunakan pseudo-elements atau font */
+        .heart::before, .checkmark::before {
+            content: '❤️'; /* Ganti dengan ikon font jika ada (misalnya Font Awesome) */
+        }
+
+        .checkmark::before {
+            content: '✅';
         }
     </style>
 </head>
@@ -97,7 +139,7 @@
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#services">Services</a>
+        <a href="#services">Services ▼</a>
         <a href="#features">Features</a>
         <a href="#news">News</a>
         <a href="#help">Help</a>
@@ -105,10 +147,10 @@
 
     <div class="container">
         <div class="content">
-            <h3 class="section-title">❤️ What is Nostr addresses (NIP-05) for Nostr?</h3>
+            <h3 class="section-title"><span class="heart"></span> What is Nostr addresses (NIP-05) for Nostr?</h3>
             <p>It’s a human-readable identifier for your public key. It makes finding your profile on Nostr easier. It makes identifying your account easier. A NIP-05 ID also provides you with a shiny verified checkmark!</p>
 
-            <h3 class="section-title">✅ Why get an identifier on Nostr Plebs?</h3>
+            <h3 class="section-title"><span class="checkmark"></span> Why get an identifier on Nostr Plebs?</h3>
             <p>Nostr Plebs is a Nostr address (NIP-05) and Nostr services provider built by Bitcoiner for Bitcoiner. Nostr Plebs instantly groups your profile and makes other users able to easily find you and make you identifiable. Go to our <a href="#" class="link">directory</a> to find people to follow.</p>
 
             <p>Besides NIP-05 ID registration, Nostr Plebs offers members Lightning Address support, an email address, and a relay with more planned features to come.</p>
@@ -118,7 +160,9 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Nostr Plebs. All rights reserved.</p>
+        <p>© 2025 Nostr Plebs. All rights reserved.</p>
     </footer>
+
+    <div class="bubble">?</div>
 </body>
 </html>
