@@ -22,9 +22,9 @@
         }
 
         .header-content {
-            max-width: 1400px; /* Jarak kosong yang lebih luas */
+            max-width: 1600px; /* Memperluas lebar maksimum untuk ruang kosong yang lebih luas */
             margin: 0 auto;
-            padding: 0 80px; /* Meningkatkan padding untuk jarak kosong di sisi kiri/kanan */
+            padding: 0 120px; /* Meningkatkan padding untuk jarak kosong yang lebih luas di sisi kiri/kanan */
         }
 
         nav {
@@ -58,10 +58,10 @@
         }
 
         .content {
-            max-width: 800px; /* Lebih lebar dari kode ChatGPT untuk mendekati gambar */
+            max-width: 1000px; /* Memperluas lebar konten untuk mendekati gambar */
             margin: 20px auto;
             text-align: left;
-            padding: 0 80px; /* Meningkatkan padding untuk jarak kosong di sisi kiri/kanan */
+            padding: 0 120px; /* Meningkatkan padding untuk jarak kosong yang lebih luas di sisi kiri/kanan */
         }
 
         h1 {
@@ -118,7 +118,7 @@
         .bubble {
             position: fixed;
             bottom: 20px;
-            right: 80px; /* Menggeser bubble lebih ke kanan untuk jarak kosong yang konsisten */
+            right: 120px; /* Menggeser bubble lebih ke kanan untuk jarak kosong yang konsisten */
             background-color: #4a148c;
             border-radius: 50%;
             width: 50px;
@@ -140,8 +140,8 @@
         /* Responsive Design */
         @media (max-width: 1200px) {
             .header-content, .content {
-                max-width: 1000px;
-                padding: 0 60px;
+                max-width: 1200px;
+                padding: 0 80px;
             }
 
             .nav-buttons {
@@ -149,7 +149,7 @@
             }
 
             .bubble {
-                right: 60px;
+                right: 80px;
             }
         }
 
@@ -223,6 +223,6 @@
         <p>© 2025 Nostr Plebs. All rights reserved.</p>
     </footer>
 
-    <div class="bubble">?</div>
+    <div class="bubble">Sigma</div>
 </body>
 </html>
