@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Nostr Plebs!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -70,17 +71,13 @@
             font-size: 1em;
         }
 
-        .checkmark {
-            color: #4CAF50;
+        .icon {
             margin-right: 8px;
             font-size: 1.1em;
         }
 
-        .heart {
-            color: #bb86fc;
-            margin-right: 8px;
-            font-size: 1.1em;
-        }
+        .heart { color: #bb86fc; }
+        .checkmark { color: #4CAF50; }
 
         .link {
             color: #bb86fc;
@@ -103,7 +100,6 @@
             width: 100%;
         }
 
-        /* Menambahkan styling untuk elemen tambahan */
         .bubble {
             position: fixed;
             bottom: 20px;
@@ -119,15 +115,40 @@
             font-size: 1.5em;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
         }
 
-        /* Simulasi ikon menggunakan pseudo-elements atau font */
-        .heart::before, .checkmark::before {
-            content: '❤️'; /* Ganti dengan ikon font jika ada (misalnya Font Awesome) */
+        .bubble:hover {
+            background-color: #6a1aec;
         }
 
-        .checkmark::before {
-            content: '✅';
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.2em;
+                padding: 15px 0;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9em;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+
+            .section-title {
+                font-size: 1.1em;
+            }
+
+            .bubble {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
@@ -139,7 +160,7 @@
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#services">Services ▼</a>
+        <a href="#services">Services <i class="fas fa-caret-down"></i></a>
         <a href="#features">Features</a>
         <a href="#news">News</a>
         <a href="#help">Help</a>
@@ -147,10 +168,10 @@
 
     <div class="container">
         <div class="content">
-            <h3 class="section-title"><span class="heart"></span> What is Nostr addresses (NIP-05) for Nostr?</h3>
+            <h3 class="section-title"><i class="fas fa-heart icon heart"></i> What is Nostr addresses (NIP-05) for Nostr?</h3>
             <p>It’s a human-readable identifier for your public key. It makes finding your profile on Nostr easier. It makes identifying your account easier. A NIP-05 ID also provides you with a shiny verified checkmark!</p>
 
-            <h3 class="section-title"><span class="checkmark"></span> Why get an identifier on Nostr Plebs?</h3>
+            <h3 class="section-title"><i class="fas fa-check icon checkmark"></i> Why get an identifier on Nostr Plebs?</h3>
             <p>Nostr Plebs is a Nostr address (NIP-05) and Nostr services provider built by Bitcoiner for Bitcoiner. Nostr Plebs instantly groups your profile and makes other users able to easily find you and make you identifiable. Go to our <a href="#" class="link">directory</a> to find people to follow.</p>
 
             <p>Besides NIP-05 ID registration, Nostr Plebs offers members Lightning Address support, an email address, and a relay with more planned features to come.</p>
