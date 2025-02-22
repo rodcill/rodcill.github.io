@@ -3,239 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Nostr Plebs!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Nostr Plebs Clone</title>
     <style>
         body {
-            background-color: #1a1a1a;
+            background-color: #181818;
             color: white;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: Arial, sans-serif;
+            text-align: center;
             margin: 0;
             padding: 0;
-            text-align: center;
-            line-height: 1.6;
         }
-
         .navbar {
             background-color: #4a148c;
-            padding: 20px 0;
+            padding: 10px;
         }
-
-        .header-content {
-            max-width: 1400px; /* Jarak kosong yang lebih luas */
-            margin: 0 auto;
-            padding: 0 80px; /* Meningkatkan padding untuk jarak kosong di sisi kiri/kanan */
-        }
-
-        nav {
-            background-color: #333;
-            padding: 10px 0;
-            border-bottom: 1px solid #4a4a4a;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
         .nav-buttons {
             display: flex;
             justify-content: center;
-            gap: 25px; /* Lebih besar untuk jarak antar tautan */
+            gap: 10px;
         }
-
-        .nav-buttons a {
-            color: #b0b0b0;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: 500;
+        .nav-buttons button {
+            background-color: #555;
+            color: white;
+            border: none;
             padding: 10px 20px;
-            transition: color 0.3s;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
         }
-
-        .nav-buttons a:hover {
-            color: #fff;
-        }
-
         .content {
-            max-width: 800px; /* Lebih lebar dari kode ChatGPT untuk mendekati gambar */
+            max-width: 600px;
             margin: 20px auto;
             text-align: left;
-            padding: 0 80px; /* Meningkatkan padding untuk jarak kosong di sisi kiri/kanan */
         }
-
         h1 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 24px;
         }
-
         .section {
             margin-top: 20px;
         }
-
         .section h2 {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3em;
-            color: #bb86fc;
-            margin-bottom: 10px;
+            font-size: 20px;
         }
-
-        .section p {
-            color: #e0e0e0;
-            font-size: 1em;
-            margin-bottom: 15px;
-        }
-
-        .icon {
-            font-size: 1.2em;
-        }
-
-        .heart { color: #bb86fc; }
-        .checkmark { color: #4CAF50; }
-
-        .link {
-            color: #bb86fc;
+        .section a {
+            color: #4a90e2;
             text-decoration: none;
-            font-weight: 500;
-        }
-
-        .link:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background-color: #333;
-            color: #b0b0b0;
-            font-size: 0.9em;
-            position: relative;
-            width: 100%;
-        }
-
-        .bubble {
-            position: fixed;
-            bottom: 20px;
-            right: 80px; /* Menggeser bubble lebih ke kanan untuk jarak kosong yang konsisten */
-            background-color: #4a148c;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.5em;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-
-        .bubble:hover {
-            background-color: #6a1aec;
-        }
-
-        /* Logo (simulasi) */
-        .logo {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background-image: url('https://nostrplebs.com/favicon.ico'); /* Ganti dengan logo asli jika tersedia */
-            background-size: contain;
-            background-repeat: no-repeat;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .header-content, .content {
-                max-width: 1000px;
-                padding: 0 60px;
-            }
-
-            .nav-buttons {
-                gap: 20px;
-            }
-
-            .bubble {
-                right: 60px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 0;
-            }
-
-            .header-content, .content {
-                padding: 15px 20px;
-            }
-
-            h1 {
-                font-size: 1.2em;
-            }
-
-            .nav-buttons {
-                gap: 15px;
-            }
-
-            .nav-buttons a {
-                font-size: 0.9em;
-                padding: 8px 15px;
-            }
-
-            .section h2 {
-                font-size: 1.1em;
-            }
-
-            .bubble {
-                width: 40px;
-                height: 40px;
-                bottom: 15px;
-                right: 20px;
-                font-size: 1.2em;
-            }
-
-            .logo {
-                width: 20px;
-                height: 20px;
-            }
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <div class="header-content">
-            <h1>Welcome to Nostr Plebs!<br>Get a Nostr address</h1>
-        </div>
+        <h1>Welcome to Nostr Plebs!<br> Get a Nostr address</h1>
     </div>
-
-    <nav>
-        <div class="nav-buttons">
-            <a href="#home"><span class="logo"></span>Home</a>
-            <a href="#services">Services <i class="fas fa-caret-down"></i></a>
-            <a href="#features">Features</a>
-            <a href="#news">News</a>
-            <a href="#help">Help</a>
-        </div>
-    </nav>
-
+    <div class="nav-buttons">
+        <button>Home</button>
+        <button>Services</button>
+        <button>Features</button>
+        <button>News</button>
+        <button>Help</button>
+    </div>
     <div class="content">
         <div class="section">
-            <h2><i class="fas fa-heart icon heart"></i> What is <a href="#" class="link">Nostr addresses (NIP-05)</a> for Nostr?</h2>
-            <p>It’s a human-readable identifier for your public key. It makes finding your profile on Nostr easier. It makes identifying your account easier. A NIP-05 ID also provides you with a shiny verified checkmark!</p>
+            <h2>❤️ What is <a href="#">Nostr addresses (NIP-05)</a> for Nostr?</h2>
+            <p>It's a human-readable identifier for your public key. It makes finding your profile on Nostr easier...</p>
         </div>
         <div class="section">
-            <h2><i class="fas fa-check icon checkmark"></i> Why get an identifier on Nostr Plebs?</h2>
-            <p>Nostr Plebs is a Nostr address (NIP-05) and Nostr services provider built by Bitcoiner for Bitcoiner. Nostr Plebs instantly groups your profile and makes other users able to easily find you and make you identifiable. Go to our <a href="#" class="link">directory</a> to find people to follow.</p>
-            <p>Besides NIP-05 ID registration, Nostr Plebs offers members Lightning Address support, an email address, and a relay with more planned features to come.</p>
-            <p>We also have a comparison of all NIP-05 providers.</p>
+            <h2>✅ Why get an identifier on Nostr Plebs?</h2>
+            <p>Nostr Plebs is a Nostr address (NIP-05) and Nostr services provider...</p>
         </div>
     </div>
-
-    <footer>
-        <p>© 2025 Nostr Plebs. All rights reserved.</p>
-    </footer>
-
-    <div class="bubble">?</div>
 </body>
 </html>
