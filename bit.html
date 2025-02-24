@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Forks Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .node {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .node:hover {
+            transform: scale(1.1);
+        }
+
+        .line {
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .text {
+            font-size: 12px;
+            fill: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>A Map of Bitcoin Forks</h1>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background: #d3d3e8;"></div> Bitcoin Core</div>
+            <div class="legend-item"><div class="legend-color" style="background: #ffb6c1;"></div> Bitcoin Dark</div>
+            <div class="legend-item"><div class="legend-color" style="background: #808080;"></div> Other Fork Coins</div>
+            <div class="legend-item"><div class="legend-color" style="background: #98fb98;"></div> Bitcoin Knots</div>
+            <div class="legend-item"><div class="legend-color" style="background: #9acd32;"></div> Bitcoin ABC</div>
+            <div class="legend-item"><div class="legend-color" style="background: #a9a9a9;"></div> Abandoned Fork</div>
+            <div class="legend-item"><div class="legend-color" style="background: #dda0dd;"></div> Bitcoin SV</div>
+            <div class="legend-item"><div class="legend-color" style="background: #228b22;"></div> Bitcoin Classic</div>
+            <div class="legend-item"><div class="legend-color" style="background: #ffffe0;"></div> Bitcoin Core Sq</div>
+            <div class="legend-item"><div class="legend-color" style="background: #e6e6fa;"></div> Major Events</div>
+        </div>
+        <svg width="1000" height="600">
+            <!-- Main Bitcoin line (Bitcoin Core) -->
+            <path class="line" d="M50 300 H900" stroke="#d3d3e8" />
+            
+            <!-- Regular Blockchain Forks -->
+            <circle cx="50" cy="300" r="10" fill="#d3d3e8" class="node" />
+            <text x="40" y="320" class="text">Bitcoin</text>
+            
+            <!-- First Soft Fork -->
+            <path class="line" d="M150 300 V280 H200" stroke="#d3d3e8" />
+            <circle cx="200" cy="280" r="10" fill="#d3d3e8" class="node" />
+            <text x="210" y="270" class="text">First Soft Fork</text>
+            
+            <!-- Bitcoin Knots -->
+            <path class="line" d="M250 300 V260 H300" stroke="#98fb98" />
+            <circle cx="300" cy="260" r="10" fill="#98fb98" class="node" />
+            <text x="310" y="250" class="text">Bitcoin Knots</text>
+            
+            <!-- Libbitcoin -->
+            <path class="line" d="M350 300 V240 H400" stroke="#98fb98" />
+            <circle cx="400" cy="240" r="10" fill="#98fb98" class="node" />
+            <text x="410" y="230" class="text">Libbitcoin</text>
+            
+            <!-- BIP148 Client -->
+            <path class="line" d="M450 300 V220 H500" stroke="#00ced1" />
+            <circle cx="500" cy="220" r="10" fill="#00ced1" class="node" />
+            <text x="510" y="210" class="text">BIP148 Client</text>
+            
+            <!-- BTC1 -->
+            <path class="line" d="M550 300 V200 H600" stroke="#0000ff" />
+            <circle cx="600" cy="200" r="10" fill="#0000ff" class="node" />
+            <text x="610" y="190" class="text">BTC1</text>
+            
+            <!-- Bitcoin ABC -->
+            <path class="line" d="M650 300 V180 H700" stroke="#9acd32" />
+            <circle cx="700" cy="180" r="10" fill="#9acd32" class="node" />
+            <text x="710" y="170" class="text">Bitcoin ABC</text>
+            
+            <!-- Bitcoin Cash -->
+            <path class="line" d="M750 300 V160 H800" stroke="#9acd32" />
+            <circle cx="800" cy="160" r="10" fill="#9acd32" class="node" />
+            <text x="810" y="150" class="text">Bitcoin Cash</text>
+            
+            <!-- Bitcoin Classic -->
+            <path class="line" d="M850 300 V140 H900" stroke="#228b22" />
+            <circle cx="900" cy="140" r="10" fill="#228b22" class="node" />
+            <text x="910" y="130" class="text">Bitcoin Classic</text>
+            
+            <!-- Bitcoin Dark (branching off) -->
+            <path class="line" d="M500 300 H550 V350 H600" stroke="#ffb6c1" />
+            <circle cx="600" cy="350" r="10" fill="#ffb6c1" class="node" />
+            <text x="610" y="360" class="text">Bitcoin Dark</text>
+            
+            <!-- Other connections and nodes can be added similarly based on the image -->
+        </svg>
+    </div>
+</body>
+</html>
