@@ -38,7 +38,7 @@
         .chart-container {
             width: 80%;
             max-width: 700px;
-            height: 400px; /* Menyesuaikan tinggi agar lebih proporsional */
+            height: 400px;
         }
     </style>
 </head>
@@ -52,17 +52,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const data = [
-                {transaksi: 1, modalAkhir: 1.00},
-                {transaksi: 2, modalAkhir: 2.00},
-                {transaksi: 3, modalAkhir: 4.00},
-                {transaksi: 4, modalAkhir: 8.00},
-                {transaksi: 5, modalAkhir: 16.00},
-                {transaksi: 6, modalAkhir: 32.00},
-                {transaksi: 7, modalAkhir: 64.00},
-                {transaksi: 8, modalAkhir: 128.00},
-                {transaksi: 9, modalAkhir: 256.00},
-                {transaksi: 10, modalAkhir: 512.00},
-                {transaksi: 11, modalAkhir: 1024.00}
+                {transaksi: 0, modalAkhir: 1},
+                {transaksi: 1, modalAkhir: 2},
+                {transaksi: 2, modalAkhir: 4},
+                {transaksi: 3, modalAkhir: 8},
+                {transaksi: 4, modalAkhir: 16},
+                {transaksi: 5, modalAkhir: 32},
+                {transaksi: 6, modalAkhir: 64},
+                {transaksi: 7, modalAkhir: 128},
+                {transaksi: 8, modalAkhir: 256},
+                {transaksi: 9, modalAkhir: 512},
+                {transaksi: 10, modalAkhir: 1024}
             ];
 
             const ctx = document.getElementById('growthChart').getContext('2d');
@@ -85,8 +85,12 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true,
-                            max: 1100 // Menyesuaikan batas atas agar grafik tidak terlalu tinggi
+                            type: 'logarithmic',
+                            ticks: {
+                                callback: function(value) {
+                                    return Number(value).toLocaleString();
+                                }
+                            }
                         }
                     }
                 }
