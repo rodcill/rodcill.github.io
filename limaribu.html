@@ -14,91 +14,135 @@
             line-height: 1.6;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
+            max-width: 1000px;
+            margin: 20px auto;
             background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.02);
         }
         h1 {
             text-align: center;
             color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         .legend {
             display: flex;
             justify-content: space-around;
             margin: 20px 0;
             flex-wrap: wrap;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .legend-item {
             display: flex;
             align-items: center;
             margin: 5px;
+            font-size: 0.9em;
         }
         .legend-color {
             width: 15px;
             height: 15px;
-            margin-right: 5px;
-            border-radius: 3px;
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         th, td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: center;
+            transition: background-color 0.3s;
         }
         th {
             background-color: #3498db;
             color: white;
+            font-weight: bold;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e6f7ff;
+            transform: scale(1.02);
         }
         .fork-cell {
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
         }
         .fork-cell:hover {
-            background-color: #f9f9f9;
+            background-color: #d1f2ff;
+            transform: scale(1.1);
         }
         .fork-dot {
             width: 15px;
             height: 15px;
             border-radius: 50%;
             margin-right: 10px;
+            transition: transform 0.2s;
+        }
+        .fork-cell:hover .fork-dot {
+            transform: scale(1.2);
         }
         .warning {
             background-color: #e74c3c;
             color: white;
             padding: 15px;
             margin-top: 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .chart-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .tooltip {
             position: absolute;
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-size: 12px;
             display: none;
             z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
-        <p>Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, artinya setiap kali Anda melakukan transaksi, modal awal Anda akan berlipat ganda. Dengan kata lain, setelah transaksi pertama, modal awal $0.50 akan menjadi $1.00, setelah transaksi kedua menjadi $2.00, dan seterusnya. Proses ini menunjukkan bagaimana modal Anda berkembang secara eksponensial dari satu transaksi ke transaksi berikutnya. Berikut adalah tabel yang menunjukkan detail pertumbuhan modal dari transaksi ke transaksi:</p>
+        <p>Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, artinya setiap kali Anda melakukan transaksi, modal awal Anda akan berlipat ganda. Dengan kata lain, setelah transaksi pertama, modal awal $0.50 akan menjadi $1.00, setelah transaksi kedua menjadi $2.00, dan seterusnya. Proses ini menunjukkan bagaimana modal Anda berkembang secara eksponensial dari satu transaksi ke transaksi berikutnya. Berikut adalah tabel dan visualisasi yang menunjukkan detail pertumbuhan modal:</p>
 
         <div class="legend">
             <div class="legend-item"><div class="legend-color" style="background: #3498db;"></div> Transaksi Awal</div>
@@ -122,6 +166,10 @@
             </tbody>
         </table>
 
+        <div class="chart-container">
+            <canvas id="growthChart"></canvas>
+        </div>
+
         <div class="warning">
             <strong>Hati-hati ketika order menjelang pergantian H4</strong>
             <p>Pada jam 17:00 WIB adalah penutupan harga inti ETHUSD H4.</p>
@@ -129,6 +177,7 @@
         <div class="tooltip" id="tooltip"></div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const data = [
             {transaksi: 1, volume: 0.01, targetPoin: 5000, modalAwal: 0.50, keuntungan: 0.50, modalAkhir: 1.00, color: '#3498db'},
@@ -182,6 +231,53 @@
                 tooltip.style.left = e.pageX + 10 + 'px';
                 tooltip.style.top = e.pageY - 20 + 'px';
             });
+        });
+
+        // Chart.js untuk visualisasi pertumbuhan modal
+        const ctx = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.map(row => `Transaksi ${row.transaksi}`),
+                datasets: [{
+                    label: 'Modal Akhir ($)',
+                    data: data.map(row => row.modalAkhir),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.1,
+                    pointBackgroundColor: data.map(row => row.color),
+                    pointRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Modal Akhir ($)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Transaksi'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            }
         });
 
         window.onload = populateTable;
