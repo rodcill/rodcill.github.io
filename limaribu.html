@@ -25,6 +25,23 @@
             text-align: center;
             color: #2c3e50;
         }
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -42,6 +59,22 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .fork-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .fork-cell:hover {
+            background-color: #f9f9f9;
+        }
+        .fork-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
         .warning {
             background-color: #e74c3c;
             color: white;
@@ -50,12 +83,28 @@
             border-radius: 5px;
             text-align: center;
         }
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: none;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
         <p>Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, artinya setiap kali Anda melakukan transaksi, modal awal Anda akan berlipat ganda. Dengan kata lain, setelah transaksi pertama, modal awal $0.50 akan menjadi $1.00, setelah transaksi kedua menjadi $2.00, dan seterusnya. Proses ini menunjukkan bagaimana modal Anda berkembang secara eksponensial dari satu transaksi ke transaksi berikutnya. Berikut adalah tabel yang menunjukkan detail pertumbuhan modal dari transaksi ke transaksi:</p>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background: #3498db;"></div> Transaksi Awal</div>
+            <div class="legend-item"><div class="legend-color" style="background: #2ecc71;"></div> Transaksi Pertumbuhan</div>
+            <div class="legend-item"><div class="legend-color" style="background: #e74c3c;"></div> Transaksi Puncak</div>
+        </div>
 
         <table id="growthTable">
             <thead>
@@ -77,39 +126,63 @@
             <strong>Hati-hati ketika order menjelang pergantian H4</strong>
             <p>Pada jam 17:00 WIB adalah penutupan harga inti ETHUSD H4.</p>
         </div>
+        <div class="tooltip" id="tooltip"></div>
     </div>
 
     <script>
-       const data = [
-    {transaksi: 1, volume: 0.01, targetPoin: 5000, modalAwal: 0.50,  keuntungan: 0.50, modalAkhir: 1.00},
-    {transaksi: 2, volume: 0.02, targetPoin: 5000, modalAwal: 1.00,  keuntungan: 1.00, modalAkhir: 2.00},
-    {transaksi: 3, volume: 0.04, targetPoin: 5000, modalAwal: 2.00,  keuntungan: 2.00, modalAkhir: 4.00},
-    {transaksi: 4, volume: 0.08, targetPoin: 5000, modalAwal: 4.00,  keuntungan: 4.00, modalAkhir: 8.00},
-    {transaksi: 5, volume: 0.16, targetPoin: 5000, modalAwal: 8.00,  keuntungan: 8.00, modalAkhir: 16.00},
-    {transaksi: 6, volume: 0.32, targetPoin: 5000, modalAwal: 16.00,  keuntungan: 16.00, modalAkhir: 32.00},
-    {transaksi: 7, volume: 0.64, targetPoin: 5000, modalAwal: 32.00,  keuntungan: 32.00, modalAkhir: 64.00},
-    {transaksi: 8, volume: 1.28, targetPoin: 5000, modalAwal: 64.00,  keuntungan: 64.00, modalAkhir: 128.00},
-    {transaksi: 9, volume: 2.56, targetPoin: 5000, modalAwal: 128.00,  keuntungan: 128.00, modalAkhir: 256.00},
-    {transaksi: 10, volume: 5.12, targetPoin: 5000, modalAwal: 256.00,  keuntungan: 256.00, modalAkhir: 512.00},
-    {transaksi: 11, volume: 10.00, targetPoin: 5000, modalAwal: 512.00,  keuntungan: 500.00, modalAkhir: 1012.00}
-];
+        const data = [
+            {transaksi: 1, volume: 0.01, targetPoin: 5000, modalAwal: 0.50, keuntungan: 0.50, modalAkhir: 1.00, color: '#3498db'},
+            {transaksi: 2, volume: 0.02, targetPoin: 5000, modalAwal: 1.00, keuntungan: 1.00, modalAkhir: 2.00, color: '#2ecc71'},
+            {transaksi: 3, volume: 0.04, targetPoin: 5000, modalAwal: 2.00, keuntungan: 2.00, modalAkhir: 4.00, color: '#2ecc71'},
+            {transaksi: 4, volume: 0.08, targetPoin: 5000, modalAwal: 4.00, keuntungan: 4.00, modalAkhir: 8.00, color: '#2ecc71'},
+            {transaksi: 5, volume: 0.16, targetPoin: 5000, modalAwal: 8.00, keuntungan: 8.00, modalAkhir: 16.00, color: '#2ecc71'},
+            {transaksi: 6, volume: 0.32, targetPoin: 5000, modalAwal: 16.00, keuntungan: 16.00, modalAkhir: 32.00, color: '#2ecc71'},
+            {transaksi: 7, volume: 0.64, targetPoin: 5000, modalAwal: 32.00, keuntungan: 32.00, modalAkhir: 64.00, color: '#2ecc71'},
+            {transaksi: 8, volume: 1.28, targetPoin: 5000, modalAwal: 64.00, keuntungan: 64.00, modalAkhir: 128.00, color: '#2ecc71'},
+            {transaksi: 9, volume: 2.56, targetPoin: 5000, modalAwal: 128.00, keuntungan: 128.00, modalAkhir: 256.00, color: '#2ecc71'},
+            {transaksi: 10, volume: 5.12, targetPoin: 5000, modalAwal: 256.00, keuntungan: 256.00, modalAkhir: 512.00, color: '#2ecc71'},
+            {transaksi: 11, volume: 10.00, targetPoin: 5000, modalAwal: 512.00, keuntungan: 500.00, modalAkhir: 1012.00, color: '#e74c3c'}
+        ];
 
         function populateTable() {
             const tableBody = document.querySelector("#growthTable tbody");
             data.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${row.transaksi}</td>
+                    <td class="fork-cell" data-name="Transaksi ${row.transaksi}">
+                        <div class="fork-dot" style="background: ${row.color};"></div>
+                        ${row.transaksi}
+                    </td>
                     <td>${row.volume.toFixed(2)}</td>
                     <td>${row.targetPoin}</td>
                     <td>${row.modalAwal.toFixed(2)}</td>
                     <td>${row.keuntungan.toFixed(2)}</td>
                     <td>${row.modalAkhir.toFixed(2)}</td>
-                    
                 `;
                 tableBody.appendChild(tr);
             });
         }
+
+        const forkCells = document.querySelectorAll('.fork-cell');
+        const tooltip = document.getElementById('tooltip');
+
+        forkCells.forEach(cell => {
+            cell.addEventListener('mouseover', (e) => {
+                tooltip.textContent = cell.getAttribute('data-name');
+                tooltip.style.display = 'block';
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 20 + 'px';
+            });
+
+            cell.addEventListener('mouseout', () => {
+                tooltip.style.display = 'none';
+            });
+
+            cell.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 20 + 'px';
+            });
+        });
 
         window.onload = populateTable;
     </script>
