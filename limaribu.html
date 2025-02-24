@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simulasi keuntungan 100% per transaksi untuk memvisualisasikan pertumbuhan modal eksponensial.">
-    <meta name="keywords" content="simulasi, keuntungan, transaksi, grafik, Chart.js">
+    <meta name="description" content="Simulasi keuntungan 100% per transaksi untuk memvisualisasikan pertumbuhan modal eksponensial melalui tabel dan grafik.">
+    <meta name="keywords" content="simulasi, keuntungan, transaksi, grafik, Chart.js, tabel">
     <meta name="author" content="Your Name">
     <title>Simulasi Keuntungan 100% per Transaksi</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -15,7 +15,7 @@
             --success-color: #27ae60;
             --warning-color: #e74c3c;
             --info-color: #3498db;
-            --light-gray: #ecf0f1;
+            --light-gray: #f4f4f4;
             --dark-gray: #333;
         }
 
@@ -62,6 +62,115 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
+        p {
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        th {
+            background-color: var(--info-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6f7ff;
+            transform: scale(1.02);
+        }
+
+        .fork-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .fork-cell:hover {
+            background-color: #d1f2ff;
+            transform: scale(1.1);
+        }
+
+        .fork-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: transform 0.2s;
+        }
+
+        .fork-cell:hover .fork-dot {
+            transform: scale(1.2);
+        }
+
+        .warning {
+            background-color: var(--warning-color);
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         .chart-container {
             width: 100%;
             max-width: 900px;
@@ -79,18 +188,34 @@
             height: 100%;
         }
 
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         /* Responsivitas */
         @media (max-width: 768px) {
             .container {
                 width: 95%;
                 padding: 15px;
             }
-            .chart-container {
+            .chart-container, table {
                 height: 300px;
                 padding: 10px;
             }
             h1 {
                 font-size: 1.8em;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.9em;
             }
         }
 
@@ -107,11 +232,6 @@
         }
 
         /* Animasi */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .fade-in {
             animation: fadeIn 1s ease-in;
         }
@@ -120,47 +240,112 @@
 <body>
     <div class="container fade-in" role="main">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
-        <p role="doc-subtitle">Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, modal Anda akan berlipat ganda secara eksponensial. Setelah transaksi pertama, $0.50 menjadi $1.00; transaksi kedua menjadi $2.00, dan seterusnya.</p>
+        <p role="doc-subtitle">Jika modal awal Anda adalah $0.50 dan setiap transaksi memberikan keuntungan sebesar 100%, modal Anda akan berlipat ganda secara eksponensial. Setelah transaksi pertama, $0.50 menjadi $1.00; transaksi kedua menjadi $2.00, dan seterusnya. Berikut adalah tabel dan visualisasi yang menunjukkan detail pertumbuhan modal:</p>
+
+        <div class="legend fade-in" aria-label="Legenda status transaksi">
+            <div class="legend-item"><div class="legend-color" style="background: var(--info-color);"></div> Transaksi Awal</div>
+            <div class="legend-item"><div class="legend-color" style="background: var(--success-color);"></div> Transaksi Pertumbuhan</div>
+            <div class="legend-item"><div class="legend-color" style="background: var(--warning-color);"></div> Transaksi Puncak</div>
+        </div>
+
+        <table id="growthTable" class="fade-in" role="table" aria-label="Tabel pertumbuhan modal per transaksi">
+            <thead>
+                <tr>
+                    <th>Transaksi</th>
+                    <th>Volume</th>
+                    <th>Target Poin</th>
+                    <th>Modal Awal ($)</th>
+                    <th>Keuntungan</th>
+                    <th>Modal Akhir ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data Rows will be inserted here -->
+            </tbody>
+        </table>
+
         <div class="chart-container fade-in" aria-label="Grafik pertumbuhan modal eksponensial per transaksi">
             <canvas id="growthChart" role="img" aria-describedby="chart-description"></canvas>
-            <p id="chart-description" class="sr-only">Grafik ini menunjukkan pertumbuhan modal akhir dari $1 hingga $1024 untuk 11 transaksi, dengan skala logaritmik untuk menampakkan pertumbuhan eksponensial.</p>
+            <p id="chart-description" class="sr-only">Grafik ini menunjukkan pertumbuhan modal akhir dari $1 hingga $1012 untuk 11 transaksi, dengan skala kustom untuk menampakkan pertumbuhan eksponensial.</p>
         </div>
+
+        <div class="warning fade-in" role="alert">
+            <strong>Hati-hati ketika order menjelang pergantian H4</strong>
+            <p>Pada jam 17:00 WIB adalah penutupan harga inti ETHUSD H4.</p>
+        </div>
+        <div class="tooltip" id="tooltip"></div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const data = [
-                {transaksi: 1, modalAkhir: 1},
-                {transaksi: 2, modalAkhir: 2},
-                {transaksi: 3, modalAkhir: 4},
-                {transaksi: 4, modalAkhir: 8},
-                {transaksi: 5, modalAkhir: 16},
-                {transaksi: 6, modalAkhir: 32},
-                {transaksi: 7, modalAkhir: 64},
-                {transaksi: 8, modalAkhir: 128},
-                {transaksi: 9, modalAkhir: 256},
-                {transaksi: 10, modalAkhir: 512},
-                {transaksi: 11, modalAkhir: 1024}
+                {transaksi: 1, volume: 0.01, targetPoin: 5000, modalAwal: 0.50, keuntungan: 0.50, modalAkhir: 1.00, color: var(--info-color)},
+                {transaksi: 2, volume: 0.02, targetPoin: 5000, modalAwal: 1.00, keuntungan: 1.00, modalAkhir: 2.00, color: var(--success-color)},
+                {transaksi: 3, volume: 0.04, targetPoin: 5000, modalAwal: 2.00, keuntungan: 2.00, modalAkhir: 4.00, color: var(--success-color)},
+                {transaksi: 4, volume: 0.08, targetPoin: 5000, modalAwal: 4.00, keuntungan: 4.00, modalAkhir: 8.00, color: var(--success-color)},
+                {transaksi: 5, volume: 0.16, targetPoin: 5000, modalAwal: 8.00, keuntungan: 8.00, modalAkhir: 16.00, color: var(--success-color)},
+                {transaksi: 6, volume: 0.32, targetPoin: 5000, modalAwal: 16.00, keuntungan: 16.00, modalAkhir: 32.00, color: var(--success-color)},
+                {transaksi: 7, volume: 0.64, targetPoin: 5000, modalAwal: 32.00, keuntungan: 32.00, modalAkhir: 64.00, color: var(--success-color)},
+                {transaksi: 8, volume: 1.28, targetPoin: 5000, modalAwal: 64.00, keuntungan: 64.00, modalAkhir: 128.00, color: var(--success-color)},
+                {transaksi: 9, volume: 2.56, targetPoin: 5000, modalAwal: 128.00, keuntungan: 128.00, modalAkhir: 256.00, color: var(--success-color)},
+                {transaksi: 10, volume: 5.12, targetPoin: 5000, modalAwal: 256.00, keuntungan: 256.00, modalAkhir: 512.00, color: var(--success-color)},
+                {transaksi: 11, volume: 10.00, targetPoin: 5000, modalAwal: 512.00, keuntungan: 500.00, modalAkhir: 1012.00, color: var(--warning-color)}
             ];
 
-            const colors = [
-                '#e74c3c', '#f39c12', '#2ecc71', '#3498db', '#9b59b6',
-                '#1abc9c', '#d35400', '#8e44ad', '#27ae60', '#2980b9', '#c0392b'
-            ];
+            function populateTable() {
+                const tableBody = document.querySelector("#growthTable tbody");
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="fork-cell" data-name="Transaksi ${row.transaksi}" aria-label="Transaksi ${row.transaksi}">
+                            <div class="fork-dot" style="background: ${row.color};" aria-hidden="true"></div>
+                            ${row.transaksi}
+                        </td>
+                        <td>${row.volume.toFixed(2)}</td>
+                        <td>${row.targetPoin}</td>
+                        <td>${row.modalAwal.toFixed(2)}</td>
+                        <td>${row.keuntungan.toFixed(2)}</td>
+                        <td>${row.modalAkhir.toFixed(2)}</td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
 
+            const forkCells = document.querySelectorAll('.fork-cell');
+            const tooltip = document.getElementById('tooltip');
+
+            forkCells.forEach(cell => {
+                cell.addEventListener('mouseover', (e) => {
+                    tooltip.textContent = cell.getAttribute('data-name');
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                    tooltip.style.top = e.pageY - 20 + 'px';
+                });
+
+                cell.addEventListener('mouseout', () => {
+                    tooltip.style.display = 'none';
+                });
+
+                cell.addEventListener('mousemove', (e) => {
+                    tooltip.style.left = e.pageX + 10 + 'px';
+                    tooltip.style.top = e.pageY - 20 + 'px';
+                });
+            });
+
+            // Chart.js untuk visualisasi pertumbuhan modal dengan skala Y khusus
             const ctx = document.getElementById('growthChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: data.map(d => `Transaksi ${d.transaksi}`),
+                    labels: data.map(row => `Transaksi ${row.transaksi}`),
                     datasets: [{
                         label: 'Modal Akhir ($)',
-                        data: data.map(d => d.modalAkhir),
-                        borderColor: colors,
-                        backgroundColor: colors.map(c => `${c}0.2`),
+                        data: data.map(row => row.modalAkhir),
+                        borderColor: data.map(row => row.color),
+                        backgroundColor: data.map(row => `${row.color}0.2`),
                         borderWidth: 2,
                         pointRadius: 6,
-                        pointBackgroundColor: colors,
+                        pointBackgroundColor: data.map(row => row.color),
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2
                     }]
@@ -172,3 +357,70 @@
                         y: {
                             type: 'logarithmic',
                             ticks: {
+                                callback: function(value) {
+                                    const customTicks = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1012];
+                                    return customTicks.includes(value) ? Number(value).toLocaleString() : null;
+                                },
+                                autoSkip: false,
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Modal Akhir ($)',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Transaksi',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                boxWidth: 20,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleFont: { size: 14 },
+                            bodyFont: { size: 12 },
+                            padding: 10
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuad'
+                    }
+                }
+            });
+
+            window.onload = populateTable;
+        });
+    </script>
+</body>
+</html>
