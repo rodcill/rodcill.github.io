@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Keuntungan 100% per Transaksi</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             margin: 0;
@@ -17,6 +18,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            flex-direction: column;
         }
         .container {
             max-width: 900px;
@@ -26,121 +28,64 @@
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             text-align: center;
+            margin-bottom: 20px;
         }
         h1 {
             color: #2c3e50;
             font-size: 2.2em;
             margin-bottom: 15px;
         }
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: background 0.3s ease-in-out, transform 0.2s;
-        }
-        .button:hover {
-            background: #219150;
-            transform: scale(1.05);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 14px;
-            text-align: center;
-        }
-        th {
-            background: linear-gradient(135deg, #2980b9, #6dd5fa);
-            color: white;
-            font-size: 1.1em;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #dfe6e9;
-            transform: scale(1.02);
-            transition: all 0.2s;
-        }
-        .warning {
-            background: #e74c3c;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-top: 20px;
-            animation: blink 1.5s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        .chart-container {
+            width: 80%;
+            max-width: 700px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
-        <button class="button" onclick="downloadCSV()">Download CSV</button>
-        <table id="growthTable">
-            <thead>
-                <tr>
-                    <th>Transaksi</th>
-                    <th>Volume</th>
-                    <th>Target Poin</th>
-                    <th>Modal Awal ($)</th>
-                    <th>Keuntungan</th>
-                    <th>Modal Akhir ($)</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <div class="warning">
-            ⚠ Hati-hati menjelang pergantian H4!
-        </div>
+        <canvas id="growthChart"></canvas>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const data = [
-                {transaksi: 1, volume: 0.01, targetPoin: 5000, modalAwal: 0.50, keuntungan: 0.50, modalAkhir: 1.00},
-                {transaksi: 2, volume: 0.02, targetPoin: 5000, modalAwal: 1.00, keuntungan: 1.00, modalAkhir: 2.00},
-                {transaksi: 3, volume: 0.04, targetPoin: 5000, modalAwal: 2.00, keuntungan: 2.00, modalAkhir: 4.00},
-                {transaksi: 4, volume: 0.08, targetPoin: 5000, modalAwal: 4.00, keuntungan: 4.00, modalAkhir: 8.00},
-                {transaksi: 5, volume: 0.16, targetPoin: 5000, modalAwal: 8.00, keuntungan: 8.00, modalAkhir: 16.00},
-                {transaksi: 6, volume: 0.32, targetPoin: 5000, modalAwal: 16.00, keuntungan: 16.00, modalAkhir: 32.00},
-                {transaksi: 7, volume: 0.64, targetPoin: 5000, modalAwal: 32.00, keuntungan: 32.00, modalAkhir: 64.00},
-                {transaksi: 8, volume: 1.28, targetPoin: 5000, modalAwal: 64.00, keuntungan: 64.00, modalAkhir: 128.00},
-                {transaksi: 9, volume: 2.56, targetPoin: 5000, modalAwal: 128.00, keuntungan: 128.00, modalAkhir: 256.00},
-                {transaksi: 10, volume: 5.12, targetPoin: 5000, modalAwal: 256.00, keuntungan: 256.00, modalAkhir: 512.00},
-                {transaksi: 11, volume: 10.24, targetPoin: 5000, modalAwal: 512.00, keuntungan: 512.00, modalAkhir: 1024.00}
+                {transaksi: 1, modalAkhir: 1.00},
+                {transaksi: 2, modalAkhir: 2.00},
+                {transaksi: 3, modalAkhir: 4.00},
+                {transaksi: 4, modalAkhir: 8.00},
+                {transaksi: 5, modalAkhir: 16.00},
+                {transaksi: 6, modalAkhir: 32.00},
+                {transaksi: 7, modalAkhir: 64.00},
+                {transaksi: 8, modalAkhir: 128.00},
+                {transaksi: 9, modalAkhir: 256.00},
+                {transaksi: 10, modalAkhir: 512.00},
+                {transaksi: 11, modalAkhir: 1024.00}
             ];
 
-            const tableBody = document.querySelector("#growthTable tbody");
-            data.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${row.transaksi}</td>
-                    <td>${row.volume.toFixed(2)}</td>
-                    <td>${row.targetPoin}</td>
-                    <td>${row.modalAwal.toFixed(2)}</td>
-                    <td>${row.keuntungan.toFixed(2)}</td>
-                    <td>${row.modalAkhir.toFixed(2)}</td>
-                `;
-                tableBody.appendChild(tr);
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => `Transaksi ${d.transaksi}`),
+                    datasets: [{
+                        label: 'Modal Akhir ($)',
+                        data: data.map(d => d.modalAkhir),
+                        borderColor: '#27ae60',
+                        backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                        borderWidth: 2,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#27ae60'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             });
         });
     </script>
