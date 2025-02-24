@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Forks Interactive Map</title>
+    <title>Bitcoin Forks Timeline Table</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            position: relative;
         }
 
         h1 {
@@ -47,43 +46,39 @@
             border-radius: 3px;
         }
 
-        .timeline {
-            position: relative;
-            height: 600px;
+        table {
             width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .line {
-            position: absolute;
-            height: 2px;
-            background: #d3d3e8;
-            top: 300px;
-            left: 0;
-            right: 0;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
         }
 
-        .node {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .node:hover {
-            transform: scale(1.2);
-        }
-
-        .node::after {
-            content: attr(data-name);
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 12px;
+        th {
+            background-color: #f2f2f2;
             color: #333;
-            white-space: nowrap;
+        }
+
+        .fork-cell {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .fork-cell:hover {
+            background-color: #f9f9f9;
+        }
+
+        .fork-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
         }
 
         .tooltip {
@@ -100,7 +95,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>A Map of Bitcoin Forks</h1>
+        <h1>Bitcoin Forks Timeline Table</h1>
         <div class="legend">
             <div class="legend-item"><div class="legend-color" style="background: #d3d3e8;"></div> Bitcoin Core</div>
             <div class="legend-item"><div class="legend-color" style="background: #ffb6c1;"></div> Bitcoin Dark</div>
@@ -113,67 +108,117 @@
             <div class="legend-item"><div class="legend-color" style="background: #ffffe0;"></div> Bitcoin Core Sq</div>
             <div class="legend-item"><div class="legend-color" style="background: #e6e6fa;"></div> Major Events</div>
         </div>
-        <div class="timeline">
-            <div class="line"></div>
-            <!-- Bitcoin (Starting Point) -->
-            <div class="node" style="left: 5%; top: 300px; background: #d3d3e8;" data-name="Bitcoin"></div>
-            
-            <!-- First Soft Fork -->
-            <div class="node" style="left: 15%; top: 280px; background: #d3d3e8;" data-name="First Soft Fork"></div>
-            <div class="connection" style="left: 5%; top: 300px; width: 10%; height: 2px; background: #d3d3e8; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Bitcoin Knots -->
-            <div class="node" style="left: 25%; top: 260px; background: #98fb98;" data-name="Bitcoin Knots"></div>
-            <div class="connection" style="left: 15%; top: 280px; width: 10%; height: 2px; background: #98fb98; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Libbitcoin -->
-            <div class="node" style="left: 35%; top: 240px; background: #98fb98;" data-name="Libbitcoin"></div>
-            <div class="connection" style="left: 25%; top: 260px; width: 10%; height: 2px; background: #98fb98; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- BIP148 Client -->
-            <div class="node" style="left: 45%; top: 220px; background: #00ced1;" data-name="BIP148 Client"></div>
-            <div class="connection" style="left: 35%; top: 240px; width: 10%; height: 2px; background: #00ced1; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- BTC1 -->
-            <div class="node" style="left: 55%; top: 200px; background: #0000ff;" data-name="BTC1"></div>
-            <div class="connection" style="left: 45%; top: 220px; width: 10%; height: 2px; background: #0000ff; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Bitcoin ABC -->
-            <div class="node" style="left: 65%; top: 180px; background: #9acd32;" data-name="Bitcoin ABC"></div>
-            <div class="connection" style="left: 55%; top: 200px; width: 10%; height: 2px; background: #9acd32; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Bitcoin Cash -->
-            <div class="node" style="left: 75%; top: 160px; background: #9acd32;" data-name="Bitcoin Cash"></div>
-            <div class="connection" style="left: 65%; top: 180px; width: 10%; height: 2px; background: #9acd32; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Bitcoin Classic -->
-            <div class="node" style="left: 85%; top: 140px; background: #228b22;" data-name="Bitcoin Classic"></div>
-            <div class="connection" style="left: 75%; top: 160px; width: 10%; height: 2px; background: #228b22; transform: rotate(-45deg); transform-origin: 0 0;"></div>
-            
-            <!-- Bitcoin Dark -->
-            <div class="node" style="left: 55%; top: 350px; background: #ffb6c1;" data-name="Bitcoin Dark"></div>
-            <div class="connection" style="left: 45%; top: 300px; width: 10%; height: 2px; background: #ffb6c1; transform: rotate(45deg); transform-origin: 0 100%;"></div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Event/Fork</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin">
+                        <div class="fork-dot" style="background: #d3d3e8;"></div>
+                        Bitcoin
+                    </td>
+                    <td>Original Bitcoin blockchain</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="First Soft Fork">
+                        <div class="fork-dot" style="background: #d3d3e8;"></div>
+                        First Soft Fork
+                    </td>
+                    <td>Initial soft fork from Bitcoin Core</td>
+                    <td>Disputed</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin Knots">
+                        <div class="fork-dot" style="background: #98fb98;"></div>
+                        Bitcoin Knots
+                    </td>
+                    <td>Alternative implementation of Bitcoin Core</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Libbitcoin">
+                        <div class="fork-dot" style="background: #98fb98;"></div>
+                        Libbitcoin
+                    </td>
+                    <td>Lightweight Bitcoin library and client</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="BIP148 Client">
+                        <div class="fork-dot" style="background: #00ced1;"></div>
+                        BIP148 Client
+                    </td>
+                    <td>Client enforcing BIP148 for SegWit activation</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="BTC1">
+                        <div class="fork-dot" style="background: #0000ff;"></div>
+                        BTC1
+                    </td>
+                    <td>Proposed Bitcoin scaling client</td>
+                    <td>Abandoned</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin ABC">
+                        <div class="fork-dot" style="background: #9acd32;"></div>
+                        Bitcoin ABC
+                    </td>
+                    <td>Implementation of Bitcoin Cash</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin Cash">
+                        <div class="fork-dot" style="background: #9acd32;"></div>
+                        Bitcoin Cash
+                    </td>
+                    <td>Hard fork from Bitcoin for larger block size</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin Classic">
+                        <div class="fork-dot" style="background: #228b22;"></div>
+                        Bitcoin Classic
+                    </td>
+                    <td>Proposal for larger block sizes</td>
+                    <td>Abandoned</td>
+                </tr>
+                <tr>
+                    <td class="fork-cell" data-name="Bitcoin Dark">
+                        <div class="fork-dot" style="background: #ffb6c1;"></div>
+                        Bitcoin Dark
+                    </td>
+                    <td>Privacy-focused fork of Bitcoin</td>
+                    <td>Active</td>
+                </tr>
+            </tbody>
+        </table>
         <div class="tooltip" id="tooltip"></div>
     </div>
 
     <script>
-        const nodes = document.querySelectorAll('.node');
+        const forkCells = document.querySelectorAll('.fork-cell');
         const tooltip = document.getElementById('tooltip');
 
-        nodes.forEach(node => {
-            node.addEventListener('mouseover', (e) => {
-                tooltip.textContent = node.getAttribute('data-name');
+        forkCells.forEach(cell => {
+            cell.addEventListener('mouseover', (e) => {
+                tooltip.textContent = cell.getAttribute('data-name');
                 tooltip.style.display = 'block';
                 tooltip.style.left = e.pageX + 10 + 'px';
                 tooltip.style.top = e.pageY - 20 + 'px';
             });
 
-            node.addEventListener('mouseout', () => {
+            cell.addEventListener('mouseout', () => {
                 tooltip.style.display = 'none';
             });
 
-            node.addEventListener('mousemove', (e) => {
+            cell.addEventListener('mousemove', (e) => {
                 tooltip.style.left = e.pageX + 10 + 'px';
                 tooltip.style.top = e.pageY - 20 + 'px';
             });
