@@ -38,13 +38,16 @@
         .chart-container {
             width: 80%;
             max-width: 700px;
+            height: 400px; /* Menyesuaikan tinggi agar lebih proporsional */
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Simulasi Keuntungan 100% per Transaksi</h1>
-        <canvas id="growthChart"></canvas>
+        <div class="chart-container">
+            <canvas id="growthChart"></canvas>
+        </div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -82,7 +85,8 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            max: 1100 // Menyesuaikan batas atas agar grafik tidak terlalu tinggi
                         }
                     }
                 }
