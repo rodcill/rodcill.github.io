@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitcoin Forks Map</title>
+    <title>Bitcoin Forks Interactive Map</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +19,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         h1 {
@@ -46,29 +47,54 @@
             border-radius: 3px;
         }
 
-        svg {
+        .timeline {
+            position: relative;
+            height: 600px;
             width: 100%;
-            height: auto;
-            margin-top: 20px;
+        }
+
+        .line {
+            position: absolute;
+            height: 2px;
+            background: #d3d3e8;
+            top: 300px;
+            left: 0;
+            right: 0;
         }
 
         .node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s;
         }
 
         .node:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
 
-        .line {
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .text {
+        .node::after {
+            content: attr(data-name);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 12px;
-            fill: #333;
+            color: #333;
+            white-space: nowrap;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: none;
+            z-index: 10;
         }
     </style>
 </head>
@@ -87,61 +113,71 @@
             <div class="legend-item"><div class="legend-color" style="background: #ffffe0;"></div> Bitcoin Core Sq</div>
             <div class="legend-item"><div class="legend-color" style="background: #e6e6fa;"></div> Major Events</div>
         </div>
-        <svg width="1000" height="600">
-            <!-- Main Bitcoin line (Bitcoin Core) -->
-            <path class="line" d="M50 300 H900" stroke="#d3d3e8" />
-            
-            <!-- Regular Blockchain Forks -->
-            <circle cx="50" cy="300" r="10" fill="#d3d3e8" class="node" />
-            <text x="40" y="320" class="text">Bitcoin</text>
+        <div class="timeline">
+            <div class="line"></div>
+            <!-- Bitcoin (Starting Point) -->
+            <div class="node" style="left: 5%; top: 300px; background: #d3d3e8;" data-name="Bitcoin"></div>
             
             <!-- First Soft Fork -->
-            <path class="line" d="M150 300 V280 H200" stroke="#d3d3e8" />
-            <circle cx="200" cy="280" r="10" fill="#d3d3e8" class="node" />
-            <text x="210" y="270" class="text">First Soft Fork</text>
+            <div class="node" style="left: 15%; top: 280px; background: #d3d3e8;" data-name="First Soft Fork"></div>
+            <div class="connection" style="left: 5%; top: 300px; width: 10%; height: 2px; background: #d3d3e8; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- Bitcoin Knots -->
-            <path class="line" d="M250 300 V260 H300" stroke="#98fb98" />
-            <circle cx="300" cy="260" r="10" fill="#98fb98" class="node" />
-            <text x="310" y="250" class="text">Bitcoin Knots</text>
+            <div class="node" style="left: 25%; top: 260px; background: #98fb98;" data-name="Bitcoin Knots"></div>
+            <div class="connection" style="left: 15%; top: 280px; width: 10%; height: 2px; background: #98fb98; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- Libbitcoin -->
-            <path class="line" d="M350 300 V240 H400" stroke="#98fb98" />
-            <circle cx="400" cy="240" r="10" fill="#98fb98" class="node" />
-            <text x="410" y="230" class="text">Libbitcoin</text>
+            <div class="node" style="left: 35%; top: 240px; background: #98fb98;" data-name="Libbitcoin"></div>
+            <div class="connection" style="left: 25%; top: 260px; width: 10%; height: 2px; background: #98fb98; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- BIP148 Client -->
-            <path class="line" d="M450 300 V220 H500" stroke="#00ced1" />
-            <circle cx="500" cy="220" r="10" fill="#00ced1" class="node" />
-            <text x="510" y="210" class="text">BIP148 Client</text>
+            <div class="node" style="left: 45%; top: 220px; background: #00ced1;" data-name="BIP148 Client"></div>
+            <div class="connection" style="left: 35%; top: 240px; width: 10%; height: 2px; background: #00ced1; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- BTC1 -->
-            <path class="line" d="M550 300 V200 H600" stroke="#0000ff" />
-            <circle cx="600" cy="200" r="10" fill="#0000ff" class="node" />
-            <text x="610" y="190" class="text">BTC1</text>
+            <div class="node" style="left: 55%; top: 200px; background: #0000ff;" data-name="BTC1"></div>
+            <div class="connection" style="left: 45%; top: 220px; width: 10%; height: 2px; background: #0000ff; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- Bitcoin ABC -->
-            <path class="line" d="M650 300 V180 H700" stroke="#9acd32" />
-            <circle cx="700" cy="180" r="10" fill="#9acd32" class="node" />
-            <text x="710" y="170" class="text">Bitcoin ABC</text>
+            <div class="node" style="left: 65%; top: 180px; background: #9acd32;" data-name="Bitcoin ABC"></div>
+            <div class="connection" style="left: 55%; top: 200px; width: 10%; height: 2px; background: #9acd32; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- Bitcoin Cash -->
-            <path class="line" d="M750 300 V160 H800" stroke="#9acd32" />
-            <circle cx="800" cy="160" r="10" fill="#9acd32" class="node" />
-            <text x="810" y="150" class="text">Bitcoin Cash</text>
+            <div class="node" style="left: 75%; top: 160px; background: #9acd32;" data-name="Bitcoin Cash"></div>
+            <div class="connection" style="left: 65%; top: 180px; width: 10%; height: 2px; background: #9acd32; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
             <!-- Bitcoin Classic -->
-            <path class="line" d="M850 300 V140 H900" stroke="#228b22" />
-            <circle cx="900" cy="140" r="10" fill="#228b22" class="node" />
-            <text x="910" y="130" class="text">Bitcoin Classic</text>
+            <div class="node" style="left: 85%; top: 140px; background: #228b22;" data-name="Bitcoin Classic"></div>
+            <div class="connection" style="left: 75%; top: 160px; width: 10%; height: 2px; background: #228b22; transform: rotate(-45deg); transform-origin: 0 0;"></div>
             
-            <!-- Bitcoin Dark (branching off) -->
-            <path class="line" d="M500 300 H550 V350 H600" stroke="#ffb6c1" />
-            <circle cx="600" cy="350" r="10" fill="#ffb6c1" class="node" />
-            <text x="610" y="360" class="text">Bitcoin Dark</text>
-            
-            <!-- Other connections and nodes can be added similarly based on the image -->
-        </svg>
+            <!-- Bitcoin Dark -->
+            <div class="node" style="left: 55%; top: 350px; background: #ffb6c1;" data-name="Bitcoin Dark"></div>
+            <div class="connection" style="left: 45%; top: 300px; width: 10%; height: 2px; background: #ffb6c1; transform: rotate(45deg); transform-origin: 0 100%;"></div>
+        </div>
+        <div class="tooltip" id="tooltip"></div>
     </div>
+
+    <script>
+        const nodes = document.querySelectorAll('.node');
+        const tooltip = document.getElementById('tooltip');
+
+        nodes.forEach(node => {
+            node.addEventListener('mouseover', (e) => {
+                tooltip.textContent = node.getAttribute('data-name');
+                tooltip.style.display = 'block';
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 20 + 'px';
+            });
+
+            node.addEventListener('mouseout', () => {
+                tooltip.style.display = 'none';
+            });
+
+            node.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 20 + 'px';
+            });
+        });
+    </script>
 </body>
 </html>
