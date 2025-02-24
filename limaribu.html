@@ -125,8 +125,18 @@
             background: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            max-height: 600px; /* Tinggi maksimum yang lebih besar */
-            height: auto; /* Membiarkan tinggi menyesuaikan konten */
+            width: 100%; /* Lebar sama dengan tabel */
+            max-height: 400px; /* Tinggi maksimum yang sebanding dengan tabel */
+            min-height: 400px; /* Tinggi minimum untuk konsistensi */
+            height: auto; /* Menyesuaikan dengan konten */
+        }
+        #growthTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+            max-height: 400px; /* Batas tinggi tabel untuk konsistensi dengan grafik */
+            overflow-y: auto; /* Tambahkan scroll jika tabel terlalu panjang */
         }
         .tooltip {
             position: absolute;
