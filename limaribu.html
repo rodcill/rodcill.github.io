@@ -233,7 +233,7 @@
             });
         });
 
-        // Chart.js untuk visualisasi pertumbuhan modal
+        // Chart.js untuk visualisasi pertumbuhan modal dengan skala Y khusus
         const ctx = document.getElementById('growthChart').getContext('2d');
         new Chart(ctx, {
             type: 'line',
@@ -256,6 +256,14 @@
                 scales: {
                     y: {
                         beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                const customTicks = [0, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1200];
+                                return customTicks.includes(value) ? value : null;
+                            },
+                            stepSize: 1,
+                            autoSkip: false
+                        },
                         title: {
                             display: true,
                             text: 'Modal Akhir ($)'
