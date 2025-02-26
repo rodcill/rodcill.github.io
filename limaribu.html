@@ -84,7 +84,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const data = [
+            const dataModal = [
                 {transaksi: 1, modalAkhir: 1},
                 {transaksi: 2, modalAkhir: 2},
                 {transaksi: 3, modalAkhir: 4},
@@ -98,6 +98,21 @@
                 {transaksi: 11, modalAkhir: 1024}
             ];
 
+            // Data kerugian berdasarkan asumsi dari "Tanya 5 Mengapa"
+            const dataKerugian = [
+                0,   // Transaksi 1: Tidak ada kerugian
+                0,   // Transaksi 2: Tidak ada kerugian
+                0,   // Transaksi 3: Tidak ada kerugian
+                2,   // Transaksi 4: Mulai ada kerugian kecil
+                4,   // Transaksi 5: Kerugian bertambah
+                8,   // Transaksi 6: Kerugian bertambah
+                16,  // Transaksi 7: Kerugian bertambah
+                32,  // Transaksi 8: Kerugian bertambah
+                64,  // Transaksi 9: Kerugian bertambah
+                128, // Transaksi 10: Kerugian signifikan
+                256  // Transaksi 11: Kerugian besar menghambat
+            ];
+
             const colors = [
                 '#e74c3c', '#f39c12', '#2ecc71', '#3498db', '#9b59b6',
                 '#1abc9c', '#d35400', '#8e44ad', '#27ae60', '#2980b9', '#c0392b'
@@ -107,17 +122,31 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: data.map(d => `Transaksi ${d.transaksi}`),
-                    datasets: [{
-                        label: 'Modal Akhir ($)',
-                        data: data.map(d => d.modalAkhir),
-                        borderColor: '#27ae60',
-                        backgroundColor: 'rgba(39, 174, 96, 0.2)',
-                        borderWidth: 2,
-                        pointRadius: 6,
-                        pointBackgroundColor: colors,
-                        pointBorderColor: colors
-                    }]
+                    labels: dataModal.map(d => `Transaksi ${d.transaksi}`),
+                    datasets: [
+                        {
+                            label: 'Modal Akhir ($)',
+                            data: dataModal.map(d => d.modalAkhir),
+                            borderColor: '#27ae60',
+                            backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                            borderWidth: 2,
+                            pointRadius: 6,
+                            pointBackgroundColor: colors,
+                            pointBorderColor: colors,
+                            fill: true
+                        },
+                        {
+                            label: 'Kerugian ($)',
+                            data: dataKerugian,
+                            borderColor: '#e74c3c',
+                            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 6,
+                            pointBackgroundColor: colors,
+                            pointBorderColor: colors,
+                            fill: false
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -131,6 +160,37 @@
                                 }
                             }
                         }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: $${context.raw.toLocaleString()}`;
+                                },
+                                afterLabel: function(context) {
+                                    const index = context.dataIndex;
+                                    const modal = dataModal[index].modalAkhir;
+                                    const kerugian = dataKerugian[index];
+                                    return `Persentase Kerugian: ${modal ? ((kerugian / modal) * 100).toFixed(2) : 0}%`;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const modal = dataModal[index].modalAkhir;
+                            const kerugian = dataKerugian[index];
+                            alert(`Transaksi ${index + 1}\nModal Akhir: $${modal.toLocaleString()}\nKerugian: $${kerugian.toLocaleString()}\nPersentase Kerugian: ${modal ? ((kerugian / modal) * 100).toFixed(2) : 0}%`);
+                        }
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuad'
                     }
                 }
             });
