@@ -98,19 +98,19 @@
                 {transaksi: 11, modalAkhir: 1024}
             ];
 
-            // Data kerugian yang mencapai atau melebihi 100% modal akhir
+            // Data kerugian bervariasi berdasarkan persentase yang diberikan
             const dataKerugian = [
-                0,    // Transaksi 1: 0% kerugian
-                0,    // Transaksi 2: 0% kerugian
-                2,    // Transaksi 3: 50% kerugian
-                8,    // Transaksi 4: 98% kerugian
-                16,   // Transaksi 5: 97% kerugian
-                32,   // Transaksi 6: 96% kerugian
-                64,   // Transaksi 7: 95% kerugian
-                128,  // Transaksi 8: 94% kerugian
-                256,  // Transaksi 9: 93% kerugian
-                512,  // Transaksi 10: 92% kerugian
-                1024  // Transaksi 11: 91% kerugian
+                0,                    // Transaksi 1: 0% kerugian
+                0,                    // Transaksi 2: 0% kerugian
+                0,                    // Transaksi 3: 0% kerugian
+                8 * 0.98,             // Transaksi 4: 98% kerugian = 7.84
+                16 * 0.97,            // Transaksi 5: 97% kerugian = 15.52
+                32 * 0.96,            // Transaksi 6: 96% kerugian = 30.72
+                64 * 0.95,            // Transaksi 7: 95% kerugian = 60.8
+                128 * 0.94,           // Transaksi 8: 94% kerugian = 120.32
+                256 * 0.93,           // Transaksi 9: 93% kerugian = 238.08
+                512 * 0.92,           // Transaksi 10: 92% kerugian = 471.04
+                1024 * 0.90           // Transaksi 11: 90% kerugian = 921.6
             ];
 
             const colors = [
@@ -133,7 +133,8 @@
                             pointRadius: 6,
                             pointBackgroundColor: colors,
                             pointBorderColor: colors,
-                            fill: true
+                            fill: true,
+                            tension: 0.1
                         },
                         {
                             label: 'Kerugian ($)',
@@ -144,7 +145,8 @@
                             pointRadius: 6,
                             pointBackgroundColor: colors,
                             pointBorderColor: colors,
-                            fill: false
+                            fill: false,
+                            tension: 0.1
                         }
                     ]
                 },
@@ -153,13 +155,13 @@
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            type: 'logarithmic',
+                            type: 'linear', // Linear agar perbandingan jelas
+                            beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
                                     return Number(value).toLocaleString();
                                 }
-                            },
-                            min: 0 // Memastikan skala dimulai dari 0
+                            }
                         }
                     },
                     plugins: {
