@@ -98,19 +98,19 @@
                 {transaksi: 11, modalAkhir: 1024}
             ];
 
-            // Data kerugian berdasarkan asumsi dari "Tanya 5 Mengapa"
+            // Data kerugian yang mencapai atau melebihi 100% modal akhir
             const dataKerugian = [
-                0,   // Transaksi 1: Tidak ada kerugian
-                0,   // Transaksi 2: Tidak ada kerugian
-                0,   // Transaksi 3: Tidak ada kerugian
-                2,   // Transaksi 4: Mulai ada kerugian kecil
-                4,   // Transaksi 5: Kerugian bertambah
-                8,   // Transaksi 6: Kerugian bertambah
-                16,  // Transaksi 7: Kerugian bertambah
-                32,  // Transaksi 8: Kerugian bertambah
-                64,  // Transaksi 9: Kerugian bertambah
-                128, // Transaksi 10: Kerugian signifikan
-                256  // Transaksi 11: Kerugian besar menghambat
+                0,    // Transaksi 1: 0% kerugian
+                0,    // Transaksi 2: 0% kerugian
+                2,    // Transaksi 3: 50% kerugian
+                8,    // Transaksi 4: 100% kerugian
+                16,   // Transaksi 5: 100% kerugian
+                32,   // Transaksi 6: 100% kerugian
+                64,   // Transaksi 7: 100% kerugian
+                128,  // Transaksi 8: 100% kerugian
+                256,  // Transaksi 9: 100% kerugian
+                512,  // Transaksi 10: 100% kerugian
+                1024  // Transaksi 11: 100% kerugian
             ];
 
             const colors = [
@@ -158,7 +158,8 @@
                                 callback: function(value) {
                                     return Number(value).toLocaleString();
                                 }
-                            }
+                            },
+                            min: 0 // Memastikan skala dimulai dari 0
                         }
                     },
                     plugins: {
@@ -171,7 +172,8 @@
                                     const index = context.dataIndex;
                                     const modal = dataModal[index].modalAkhir;
                                     const kerugian = dataKerugian[index];
-                                    return `Persentase Kerugian: ${modal ? ((kerugian / modal) * 100).toFixed(2) : 0}%`;
+                                    const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
+                                    return `Persentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`;
                                 }
                             }
                         },
@@ -185,7 +187,8 @@
                             const index = elements[0].index;
                             const modal = dataModal[index].modalAkhir;
                             const kerugian = dataKerugian[index];
-                            alert(`Transaksi ${index + 1}\nModal Akhir: $${modal.toLocaleString()}\nKerugian: $${kerugian.toLocaleString()}\nPersentase Kerugian: ${modal ? ((kerugian / modal) * 100).toFixed(2) : 0}%`);
+                            const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
+                            alert(`Transaksi ${index + 1}\nModal Akhir: $${modal.toLocaleString()}\nKerugian: $${kerugian.toLocaleString()}\nPersentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`);
                         }
                     },
                     animation: {
