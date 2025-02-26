@@ -55,6 +55,22 @@
             margin-bottom: 15px;
             padding-left: 20px;
         }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #34495e;
+        }
     </style>
 </head>
 <body>
@@ -62,6 +78,15 @@
         <h1>Metode Artificial Intelligence Nilai Tinggi Rendah Atas Bawah</h1>
         <div class="chart-container">
             <canvas id="growthChart"></canvas>
+        </div>
+        <div class="button-container">
+            <button onclick="updateChart('line')">Line</button>
+            <button onclick="updateChart('bar')">Bar</button>
+            <button onclick="updateChart('pie')">Pie</button>
+            <button onclick="updateChart('doughnut')">Doughnut</button>
+            <button onclick="updateChart('radar')">Radar</button>
+            <button onclick="updateChart('polarArea')">Polar Area</button>
+            <button onclick="updateChart('scatter')">Scatter</button>
         </div>
     </div>
     <div class="container">
@@ -83,6 +108,8 @@
     </div>
 
     <script>
+        let chartInstance;
+
         document.addEventListener("DOMContentLoaded", function() {
             const dataModal = [
                 {transaksi: 1, modalAkhir: 1},
@@ -98,7 +125,6 @@
                 {transaksi: 11, modalAkhir: 1024}
             ];
 
-            // Data kerugian mencapai 100% mulai dari Transaksi 4
             const dataKerugian = [
                 0,    // Transaksi 1: 0% kerugian
                 0,    // Transaksi 2: 0% kerugian
@@ -119,86 +145,123 @@
             ];
 
             const ctx = document.getElementById('growthChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dataModal.map(d => `Transaksi ${d.transaksi}`),
-                    datasets: [
-                        {
-                            label: 'Modal Akhir ($)',
-                            data: dataModal.map(d => d.modalAkhir),
-                            borderColor: '#27ae60',
-                            backgroundColor: 'rgba(39, 174, 96, 0.2)',
-                            borderWidth: 2,
-                            pointRadius: 6,
-                            pointBackgroundColor: colors,
-                            pointBorderColor: colors,
-                            fill: true,
-                            tension: 0.1
+
+            // Fungsi untuk memperbarui tipe grafik
+            function updateChart(type) {
+                if (chartInstance) {
+                    chartInstance.destroy(); // Hancurkan grafik lama
+                }
+
+                let config = {
+                    type: type,
+                    data: {
+                        labels: dataModal.map(d => `Transaksi ${d.transaksi}`),
+                        datasets: [
+                            {
+                                label: 'Modal Akhir ($)',
+                                data: dataModal.map(d => d.modalAkhir),
+                                borderColor: '#27ae60',
+                                backgroundColor: type === 'line' || type === 'scatter' ? 'rgba(39, 174, 96, 0.2)' : colors,
+                                borderWidth: 2,
+                                pointRadius: 6,
+                                pointBackgroundColor: colors,
+                                pointBorderColor: colors,
+                                fill: type === 'line' ? true : false,
+                                tension: type === 'line' ? 0.1 : 0
+                            },
+                            {
+                                label: 'Kerugian ($)',
+                                data: dataKerugian,
+                                borderColor: '#e74c3c',
+                                backgroundColor: type === 'line' || type === 'scatter' ? 'rgba(231, 76, 60, 0.1)' : colors,
+                                borderWidth: 2,
+                                pointRadius: 6,
+                                pointBackgroundColor: colors,
+                                pointBorderColor: colors,
+                                fill: type === 'line' ? false : false,
+                                tension: type === 'line' ? 0.1 : 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: $${context.raw.toLocaleString()}`;
+                                    },
+                                    afterLabel: function(context) {
+                                        const index = context.dataIndex;
+                                        const modal = dataModal[index].modalAkhir;
+                                        const kerugian = dataKerugian[index];
+                                        const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
+                                        return `Persentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`;
+                                    }
+                                }
+                            },
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            }
                         },
-                        {
-                            label: 'Kerugian ($)',
-                            data: dataKerugian,
-                            borderColor: '#e74c3c',
-                            backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                            borderWidth: 2,
-                            pointRadius: 6,
-                            pointBackgroundColor: colors,
-                            pointBorderColor: colors,
-                            fill: false,
-                            tension: 0.1
+                        animation: {
+                            duration: 1500,
+                            easing: 'easeInOutQuad'
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
+                    }
+                };
+
+                // Penyesuaian khusus berdasarkan tipe grafik
+                if (type === 'line' || type === 'scatter') {
+                    config.options.scales = {
                         y: {
-                            type: 'logarithmic', // Kembali ke logaritmik untuk grafik miring ke atas
+                            type: 'logarithmic',
                             ticks: {
                                 callback: function(value) {
                                     return Number(value).toLocaleString();
                                 }
                             },
-                            min: 1 // Mulai dari 1 karena logaritmik tidak bisa nol
+                            min: 1
                         }
-                    },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: $${context.raw.toLocaleString()}`;
-                                },
-                                afterLabel: function(context) {
-                                    const index = context.dataIndex;
-                                    const modal = dataModal[index].modalAkhir;
-                                    const kerugian = dataKerugian[index];
-                                    const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
-                                    return `Persentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`;
+                    };
+                    if (type === 'scatter') {
+                        config.data.datasets[0].data = dataModal.map(d => ({ x: d.transaksi, y: d.modalAkhir }));
+                        config.data.datasets[1].data = dataModal.map((d, i) => ({ x: d.transaksi, y: dataKerugian[i] }));
+                        config.data.labels = [];
+                    }
+                } else if (type === 'bar') {
+                    config.options.scales = {
+                        y: {
+                            type: 'linear',
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return Number(value).toLocaleString();
                                 }
                             }
-                        },
-                        legend: {
-                            display: true,
-                            position: 'top'
                         }
-                    },
-                    onClick: (event, elements) => {
-                        if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const modal = dataModal[index].modalAkhir;
-                            const kerugian = dataKerugian[index];
-                            const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
-                            alert(`Transaksi ${index + 1}\nModal Akhir: $${modal.toLocaleString()}\nKerugian: $${kerugian.toLocaleString()}\nPersentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`);
-                        }
-                    },
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeInOutQuad'
-                    }
+                    };
+                } else if (type === 'pie' || type === 'doughnut' || type === 'polarArea' || type === 'radar') {
+                    config.options.scales = {}; // Tidak perlu skala Y untuk tipe ini
                 }
-            });
+
+                config.options.onClick = (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const modal = dataModal[index].modalAkhir;
+                        const kerugian = dataKerugian[index];
+                        const persentase = modal ? ((kerugian / modal) * 100).toFixed(2) : 0;
+                        alert(`Transaksi ${index + 1}\nModal Akhir: $${modal.toLocaleString()}\nKerugian: $${kerugian.toLocaleString()}\nPersentase Kerugian: ${persentase}%${persentase >= 100 ? ' (Modal Habis)' : ''}`);
+                    }
+                };
+
+                chartInstance = new Chart(ctx, config);
+            }
+
+            // Inisialisasi dengan grafik garis
+            updateChart('line');
         });
     </script>
 </body>
