@@ -4,37 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalender Perdagangan</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .form-container, .table-container, .summary-container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container label {
+            display: inline-block;
+            width: 120px;
+            margin: 5px 0;
+        }
+
+        .form-container input, .form-container select {
+            margin: 5px 0;
+            padding: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .table-container table, .summary-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .table-container th, .table-container td,
+        .summary-container th, .summary-container td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .table-container th, .summary-container th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .table-container td, .summary-container td {
+            background-color: #fff;
+        }
+
+        .table-container tr:nth-child(even) td,
+        .summary-container tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        .table-container tr:hover td,
+        .summary-container tr:hover td {
+            background-color: #f1f1f1;
+        }
+
+        .summary-container table {
+            max-width: 400px;
+        }
+    </style>
 </head>
 <body>
     <h1>Kalender Perdagangan Forex & Bitcoin</h1>
     
+    <!-- Form untuk menambah transaksi -->
+    <div class="form-container">
+        <h2>Tambah Transaksi</h2>
+        <form id="transactionForm">
+            <label for="asset">Aset:</label>
+            <input type="text" id="asset" placeholder="EURUSD / BTC" required><br>
+            
+            <label for="type">Tipe:</label>
+            <select id="type" required>
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+            </select><br>
+            
+            <label for="amount">Jumlah:</label>
+            <input type="number" id="amount" step="0.01" min="0" required><br>
+            
+            <label for="entry">Harga Masuk:</label>
+            <input type="number" id="entry" step="0.0001" min="0" required><br>
+            
+            <label for="exit">Harga Keluar (opsional):</label>
+            <input type="number" id="exit" step="0.0001" min="0"><br>
+            
+            <label for="notes">Catatan:</label>
+            <input type="text" id="notes" placeholder="Opsional"><br>
+            
+            <button type="submit">Tambah</button>
+        </form>
+    </div>
+
+    <!-- Tabel transaksi -->
     <div class="table-container">
         <h2>Daftar Transaksi</h2>
         <table id="transactionTable">
             <thead>
                 <tr>
-                    <th>Waktu</th>
+                    <th>Tanggal</th>
+                    <th>Aset</th>
                     <th>Tipe</th>
-                    <th>Ukuran</th>
-                    <th>Simbol</th>
-                    <th>Harga</th>
-                    <th>Stop Loss</th>
-                    <th>T/P</th>
-                    <th>Waktu</th>
-                    <th>Harga</th>
-                    <th>Komisi</th>
-                    <th>Nilai Inap</th>
-                    <th>Laba/Rugi</th>
-                    <th>Komentar</th>
+                    <th>Jumlah</th>
+                    <th>Harga Masuk</th>
+                    <th>Harga Keluar</th>
+                    <th>Profit/Loss</th>
+                    <th>Catatan</th>
                 </tr>
             </thead>
-            <tbody id="transactionBody">
-                <!-- Data akan diisi oleh JavaScript -->
+            <tbody id="transactionBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Ringkasan -->
+    <div class="summary-container">
+        <h2>Ringkasan</h2>
+        <table id="summaryTable">
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Nilai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Total Trades</td><td id="totalTrades">0</td></tr>
+                <tr><td>Total Profit/Loss</td><td id="totalPL">0</td></tr>
+                <tr><td>Rata-rata P/L per Trade</td><td id="avgPL">0</td></tr>
+                <tr><td>Bitcoin Trades</td><td id="btcTrades">0</td></tr>
+                <tr><td>Forex Trades</td><td id="forexTrades">0</td></tr>
             </tbody>
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let transactions = [];
+
+        document.getElementById('transactionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Ambil nilai dari form
+            const asset = document.getElementById('asset').value.toUpperCase();
+            const type = document.getElementById('type').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const entry = parseFloat(document.getElementById('entry').value);
+            const exit = document.getElementById('exit').value ? parseFloat(document.getElementById('exit').value) : null;
+            const notes = document.getElementById('notes').value;
+
+            // Hitung profit/loss
+            let profitLoss = null;
+            if (exit !== null) {
+                profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
+            }
+
+            // Tambahkan transaksi
+            const transaction = {
+                date: new Date().toLocaleString('id-ID'),
+                asset,
+                type,
+                amount,
+                entry,
+                exit,
+                profitLoss,
+                notes
+            };
+            transactions.push(transaction);
+
+            // Reset form
+            this.reset();
+
+            // Perbarui tampilan
+            updateTable();
+            updateSummary();
+        });
+
+        function updateTable() {
+            const tbody = document.getElementById('transactionBody');
+            tbody.innerHTML = '';
+
+            transactions.forEach(t => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${t.date}</td>
+                    <td>${t.asset}</td>
+                    <td>${t.type}</td>
+                    <td>${t.amount.toFixed(2)}</td>
+                    <td>${t.entry.toFixed(4)}</td>
+                    <td>${t.exit ? t.exit.toFixed(4) : '-'}</td>
+                    <td>${t.profitLoss !== null ? t.profitLoss.toFixed(2) : '-'}</td>
+                    <td>${t.notes || '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updateSummary() {
+            const totalTrades = transactions.length;
+            const totalPL = transactions.reduce((sum, t) => sum + (t.profitLoss || 0), 0);
+            const avgPL = totalTrades > 0 ? totalPL / totalTrades : 0;
+            const btcTrades = transactions.filter(t => t.asset === 'BTC').length;
+            const forexTrades = totalTrades - btcTrades;
+
+            document.getElementById('totalTrades').textContent = totalTrades;
+            document.getElementById('totalPL').textContent = totalPL.toFixed(2);
+            document.getElementById('avgPL').textContent = avgPL.toFixed(2);
+            document.getElementById('btcTrades').textContent = btcTrades;
+            document.getElementById('forexTrades').textContent = forexTrades;
+        }
+    </script>
 </body>
 </html>
