@@ -1,7 +1,55 @@
-canvas {
-    width: 600px;  /* Atur lebar canvas */
-    height: 400px; /* Atur tinggi canvas */
-    max-width: 100%; /* Responsif */
-    margin: auto;
-    background-color: #f3f3f3; /* Warna latar belakang untuk melihat batas */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.form-container, .table-container, .summary-container {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-container label {
+    display: inline-block;
+    width: 120px;
+    margin: 5px 0;
+}
+
+.form-container input, .form-container select {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
 }
