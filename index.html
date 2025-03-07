@@ -105,10 +105,10 @@
             <input type="number" id="amount" step="0.01" min="0" required><br>
             
             <label for="entry">Harga Masuk:</label>
-            <input type="number" id="entry" step="0.0001" min="0" required><br>
+            <input type="number" id="entry" step="0.00001" min="0" required><br>
             
             <label for="exit">Harga Keluar (opsional):</label>
-            <input type="number" id="exit" step="0.0001" min="0"><br>
+            <input type="number" id="exit" step="0.00001" min="0"><br>
             
             <label for="notes">Catatan:</label>
             <input type="text" id="notes" placeholder="Opsional"><br>
@@ -178,7 +178,7 @@
                 if (asset.includes('USD') && !asset.includes('BTC') && !asset.includes('ETH')) { // Logika untuk forex (misalnya EURUSD)
                     const pipValue = 0.0001; // 1 pip
                     const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
-                    let baseProfit = pipDifference * 1.00 * amount; // 1.00 = $1 per pip untuk 0.01 lot (sesuai keinginan)
+                    let baseProfit = pipDifference * 0.01 * amount; // 1 pip = $0.01 untuk 0.01 lot
                     profitLoss = type === 'buy' ? baseProfit : -baseProfit;
                 } else { // Logika untuk kripto (BTC, ETH, dll.)
                     profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
@@ -211,8 +211,8 @@
             tbody.innerHTML = '';
 
             transactions.forEach(t => {
-                const entryDisplay = Number.isInteger(t.entry) ? t.entry : t.entry.toFixed(4);
-                const exitDisplay = t.exit !== null ? (Number.isInteger(t.exit) ? t.exit : t.exit.toFixed(4)) : '-';
+                const entryDisplay = Number.isInteger(t.entry) ? t.entry : t.entry.toFixed(5);
+                const exitDisplay = t.exit !== null ? (Number.isInteger(t.exit) ? t.exit : t.exit.toFixed(5)) : '-';
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${t.date}</td>
