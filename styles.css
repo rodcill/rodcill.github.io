@@ -13,13 +13,31 @@ body {
 
 #transactionTable {
     width: 100%;
-    border-collapse: collapse; /* Pastikan garis tidak dobel */
-    border: 2px solid #000; /* Garis luar tebal dan jelas */
+    border-collapse: collapse;
+    border: 1px solid #000;
 }
 
 #transactionTable th,
 #transactionTable td {
-    padding: 10px;
+    padding: 8px;
     text-align: center;
-    border: 1px solid #000 !important; /* Garis antar sel tebal dan jelas */
+    border: 1px solid #000;
+    font-size: 14px;
+}
+
+#transactionTable th {
+    background-color: #d3d3d3;
+    font-weight: bold;
+}
+
+#transactionTable td {
+    background-color: #fff;
+}
+
+#transactionTable tr:nth-child(even) td {
+    background-color: #f0f0f0;
+}
+
+#transactionTable tr:hover td {
+    background-color: #e0e0e0;
 }
