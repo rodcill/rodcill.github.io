@@ -166,15 +166,18 @@
             // Ambil nilai dari form
             const asset = document.getElementById('asset').value.toUpperCase();
             const type = document.getElementById('type').value;
-            const amount = parseFloat(document.getElementById('amount').value);
+            const amount = parseFloat(document.getElementById('amount').value); // Ukuran lot
             const entry = parseFloat(document.getElementById('entry').value);
             const exit = document.getElementById('exit').value ? parseFloat(document.getElementById('exit').value) : null;
             const notes = document.getElementById('notes').value;
 
-            // Hitung profit/loss
+            // Hitung profit/loss berdasarkan logika forex
             let profitLoss = null;
             if (exit !== null) {
-                profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
+                const pipValue = 0.0001; // 1 pip untuk EURUSD
+                const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
+                let baseProfit = pipDifference * (amount * 1000) * 0.10; // Nilai pip untuk mikro lot (0.01 = $0.10/pip)
+                profitLoss = type === 'buy' ? baseProfit : -baseProfit; // Buy = profit, Sell = loss
             }
 
             // Tambahkan transaksi
@@ -203,10 +206,9 @@
             tbody.innerHTML = '';
 
             transactions.forEach(t => {
-                const row = document.createElement('tr');
-                // Format harga tanpa nol tambahan jika bilangan bulat
                 const entryDisplay = Number.isInteger(t.entry) ? t.entry : t.entry.toFixed(4);
                 const exitDisplay = t.exit !== null ? (Number.isInteger(t.exit) ? t.exit : t.exit.toFixed(4)) : '-';
+                const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${t.date}</td>
                     <td>${t.asset}</td>
