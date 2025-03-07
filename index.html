@@ -4,51 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalender Perdagangan</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .table-container {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-        }
-
-        #transactionTable {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #000; /* Garis luar */
-        }
-
-        #transactionTable th,
-        #transactionTable td {
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #000; /* Garis antar sel */
-            font-size: 14px;
-        }
-
-        #transactionTable th {
-            background-color: #d3d3d3; /* Warna abu-abu header */
-            font-weight: bold;
-        }
-
-        #transactionTable td {
-            background-color: #fff;
-        }
-
-        #transactionTable tr:nth-child(even) td {
-            background-color: #f0f0f0; /* Warna bergantian untuk baris */
-        }
-
-        #transactionTable tr:hover td {
-            background-color: #e0e0e0; /* Efek hover */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Kalender Perdagangan Forex & Bitcoin</h1>
@@ -79,66 +35,6 @@
         </table>
     </div>
 
-    <script>
-        let transactions = [
-            {
-                openTime: "2025.03.07 03:07:07",
-                type: "buy",
-                size: 0.01,
-                symbol: "BTCUSD",
-                openPrice: 85890.00,
-                stopLoss: 0.00,
-                takeProfit: 0.00,
-                closeTime: "2025.03.07 03:08:00",
-                closePrice: 86044.12,
-                commission: 0.00,
-                swap: 0.00,
-                profitLoss: 1.54,
-                comment: ""
-            },
-            {
-                openTime: "2025.03.07 03:07:22",
-                type: "sell",
-                size: 0.01,
-                symbol: "BTCUSD",
-                openPrice: 85421.15,
-                stopLoss: 0.00,
-                takeProfit: 0.00,
-                closeTime: "2025.03.07 03:08:03",
-                closePrice: 86035.32,
-                commission: 0.00,
-                swap: 0.00,
-                profitLoss: 0.00,
-                comment: "cancelled"
-            }
-        ];
-
-        function updateTable() {
-            const tbody = document.getElementById('transactionBody');
-            tbody.innerHTML = '';
-
-            transactions.forEach(t => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${t.openTime}</td>
-                    <td>${t.type}</td>
-                    <td>${t.size.toFixed(2)}</td>
-                    <td>${t.symbol}</td>
-                    <td>${t.openPrice.toFixed(2)}</td>
-                    <td>${t.stopLoss.toFixed(2)}</td>
-                    <td>${t.takeProfit.toFixed(2)}</td>
-                    <td>${t.closeTime}</td>
-                    <td>${t.closePrice.toFixed(2)}</td>
-                    <td>${t.commission.toFixed(2)}</td>
-                    <td>${t.swap.toFixed(2)}</td>
-                    <td>${t.profitLoss.toFixed(2)}</td>
-                    <td>${t.comment || '-'}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        updateTable();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
