@@ -35,6 +35,12 @@
             width: 200px;
         }
 
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            display: none;
+        }
+
         button {
             padding: 8px 15px;
             background-color: #4CAF50;
@@ -83,6 +89,12 @@
         .summary-container table {
             max-width: 400px;
         }
+
+        @media (max-width: 600px) {
+            .table-container {
+                overflow-x: auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -112,6 +124,8 @@
             
             <label for="notes">Catatan:</label>
             <input type="text" id="notes" placeholder="Opsional"><br>
+            
+            <div id="errorMessage" class="error-message"></div>
             
             <button type="submit">Tambah</button>
         </form>
@@ -151,59 +165,90 @@
                 <tr><td>Total Trades</td><td id="totalTrades">0</td></tr>
                 <tr><td>Total Profit/Loss</td><td id="totalPL">0</td></tr>
                 <tr><td>Rata-rata P/L per Trade</td><td id="avgPL">0</td></tr>
-                <tr><td>Bitcoin Trades</td><td id="btcTrades">0</td></tr>
-                <tr><td>Ethereum Trades</td><td id="ethTrades">0</td></tr>
-                <tr><td>Forex Trades</td><td id="forexTrades">0</td></tr>
+                <tr><td>Trades BTC</td><td id="btcTrades">0</td></tr>
+                <tr><td>Trades ETH</td><td id="ethTrades">0</td></tr>
+                <tr><td>Trades Forex</td><td id="forexTrades">0</td></tr>
             </tbody>
         </table>
     </div>
 
     <script>
-        let transactions = [];
+        // Daftar simbol yang valid
+        const validSymbols = ['EURUSD', 'BTC', 'ETH'];
+
+        // Muat transaksi dari localStorage saat halaman dimuat
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+        // Perbarui tabel dan ringkasan saat halaman dimuat
+        updateTable();
+        updateSummary();
 
         document.getElementById('transactionForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Ambil nilai dari form
-            const asset = document.getElementById('asset').value.toUpperCase();
-            const type = document.getElementById('type').value;
-            const amount = parseFloat(document.getElementById('amount').value);
-            const entry = parseFloat(document.getElementById('entry').value);
-            const exit = document.getElementById('exit').value ? parseFloat(document.getElementById('exit').value) : null;
-            const notes = document.getElementById('notes').value;
+            // Ambil elemen untuk menampilkan pesan error
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.style.display = 'none';
+            errorMessage.textContent = '';
 
-            // Hitung profit/loss berdasarkan jenis aset
-            let profitLoss = null;
-            if (exit !== null) {
-                if (asset.includes('USD') && !asset.includes('BTC') && !asset.includes('ETH')) { // Logika untuk forex (misalnya EURUSD)
-                    const pipValue = 0.0001; // 1 pip
-                    const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
-                    let baseProfit = pipDifference * 10.00 * amount; // 1 lot = $10 per pip, 0.01 lot = $0.10 per pip
-                    profitLoss = type === 'buy' ? baseProfit : -baseProfit;
-                } else { // Logika untuk kripto (BTC, ETH, dll.)
-                    profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
+            try {
+                // Ambil nilai dari form
+                const asset = document.getElementById('asset').value.toUpperCase();
+                const type = document.getElementById('type').value;
+                const amount = parseFloat(document.getElementById('amount').value);
+                const entry = parseFloat(document.getElementById('entry').value);
+                const exit = document.getElementById('exit').value ? parseFloat(document.getElementById('exit').value) : null;
+                const notes = document.getElementById('notes').value;
+
+                // Validasi simbol
+                if (!validSymbols.includes(asset)) {
+                    throw new Error('Simbol tidak valid. Gunakan EURUSD, BTC, atau ETH.');
                 }
+
+                // Validasi nilai numerik
+                if (isNaN(amount) || isNaN(entry) || (exit !== null && isNaN(exit))) {
+                    throw new Error('Harga atau ukuran tidak valid.');
+                }
+
+                // Hitung profit/loss berdasarkan jenis aset
+                let profitLoss = null;
+                if (exit !== null) {
+                    if (asset.includes('USD') && !asset.includes('BTC') && !asset.includes('ETH')) { // Logika untuk forex (misalnya EURUSD)
+                        const pipValue = 0.0001; // 1 pip
+                        const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
+                        let baseProfit = pipDifference * 10.00 * amount; // 1 lot = $10 per pip, 0.01 lot = $0.10 per pip
+                        profitLoss = type === 'buy' ? baseProfit : -baseProfit;
+                    } else { // Logika untuk kripto (BTC, ETH, dll.)
+                        profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
+                    }
+                }
+
+                // Tambahkan transaksi
+                const transaction = {
+                    date: new Date().toLocaleString('id-ID'),
+                    asset,
+                    type,
+                    amount,
+                    entry,
+                    exit,
+                    profitLoss,
+                    notes
+                };
+                transactions.push(transaction);
+
+                // Simpan ke localStorage
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+
+                // Reset form
+                this.reset();
+
+                // Perbarui tampilan
+                updateTable();
+                updateSummary();
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
             }
-
-            // Tambahkan transaksi
-            const transaction = {
-                date: new Date().toLocaleString('id-ID'),
-                asset,
-                type,
-                amount,
-                entry,
-                exit,
-                profitLoss,
-                notes
-            };
-            transactions.push(transaction);
-
-            // Reset form
-            this.reset();
-
-            // Perbarui tampilan
-            updateTable();
-            updateSummary();
         });
 
         function updateTable() {
