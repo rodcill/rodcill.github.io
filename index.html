@@ -3,50 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sigma Grok</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="bagan.svg">
-    <style>
-        body {
-            background-color: #1e1e1e;
-            color: #e0e0e0; /* Warna teks utama diubah menjadi lebih terang */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #ff9800; /* Warna judul diubah untuk kontras yang lebih baik */
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #b0b0b0; /* Warna paragraf diubah untuk lebih jelas */
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        .highlight {
-            color: #4a90e2; /* Warna highlight tetap, tapi ini sudah cukup terlihat */
-            font-weight: bold; /* Menambahkan ketebalan untuk membedakan highlight */
-        }
-    </style>
+    <title>Kalender Perdagangan</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Uang adalah alat penyimpan nilai energi yang dapat di tukarkan</h1>
-        <p>1. <span class="highlight">Uang adalah energi</span>: Untuk membuat uang, mencetak uang dan mendapatkan uang butuh energi. Orang yang mendapat uang banyak, tetapi mengeluarkan sedikit energi, itu karena ada orang lain yang bekerja untuk mengeluarkan energinya. Atau karena orang tersebut memiliki dan bersandar pada sistem penghasil energi yang besar. Uang banyak dijaga oleh naga terkuat.</p>
-        <p>2. <span class="highlight">Mendapatkan uang di pasar uang</span>: Usaha berdagang di pasar uang, itu berarti berusaha untuk memperoleh energi di pasar uang. Orang menaruh uang dengan deposit untuk mendapatkan keuntungan di masa depan, itu berarti ingin mendapat energi dari orang lain di masa depan. Era Bitcoin telah datang, yang membutuhkan uang bukan hanya manusia, tetapi mesin, robot, perusahaan dan negara juga butuh uang.</p>
-        <p>3. <span class="highlight">Gunakan energi untuk mendapatkan uang</span>: Uang besar muncul dan di dapat dengan energi yang tidak acak. Perlu fokus dan kosentrasi tinggi di awal agar mendapat sistem yang bagus. Disiplin merupakan sistem yang disukai oleh uang.</p>
-        <p>4. <span class="highlight">Disiplin memerlukan energi dan waktu</span>: Orang yang memiliki disiplin lebih cepat sukses, dari pada orang yang memiliki rencana sukses. Displin membentuk karakter seseorang, karakter seseorang adalah takdirnya. Jika karakternya mendukung untuk sukses, maka takdir di masa depan juga akan sukses.</p>
+    <h1>Kalender Perdagangan Forex & Bitcoin</h1>
+    
+    <!-- Form untuk menambah transaksi -->
+    <div class="form-container">
+        <h2>Tambah Transaksi</h2>
+        <form id="transactionForm">
+            <label for="asset">Aset:</label>
+            <input type="text" id="asset" placeholder="EURUSD / BTC" required><br>
+            
+            <label for="type">Tipe:</label>
+            <select id="type" required>
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+            </select><br>
+            
+            <label for="amount">Jumlah:</label>
+            <input type="number" id="amount" step="0.01" min="0" required><br>
+            
+            <label for="entry">Harga Masuk:</label>
+            <input type="number" id="entry" step="0.0001" min="0" required><br>
+            
+            <label for="exit">Harga Keluar (opsional):</label>
+            <input type="number" id="exit" step="0.0001" min="0"><br>
+            
+            <label for="notes">Catatan:</label>
+            <input type="text" id="notes" placeholder="Opsional"><br>
+            
+            <button type="submit">Tambah</button>
+        </form>
     </div>
-    <div class="container">
-        <h1>Disiplin salah satu kunci kesuksesan yang benar-benar penting</h1>
-        <p>1. <span class="highlight">Hentikan meromantisir kebebasan</span>: Ini bukan keadaan yang tidak melakukan apa pun tanpa beban. Kebebasan sejati adalah kekuatan untuk memilih jalanmu dan menjalaninya, terlepas dari bagaimana perasaanmu saat itu. Disiplin bukanlah pilihan. Disiplin adalah harga tiket masuk ke kehidupan yang benar-benar milik Anda.</p>
-        <p><a href="https://x.com/sigmagrok" target="_blank"><span class="highlight">Sigma Grok</span></a> Merek di buat di 3 Maret tahun 2025</p>
+
+    <!-- Tabel transaksi -->
+    <div class="table-container">
+        <h2>Daftar Transaksi</h2>
+        <table id="transactionTable">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Aset</th>
+                    <th>Tipe</th>
+                    <th>Jumlah</th>
+                    <th>Harga Masuk</th>
+                    <th>Harga Keluar</th>
+                    <th>Profit/Loss</th>
+                    <th>Catatan</th>
+                </tr>
+            </thead>
+            <tbody id="transactionBody"></tbody>
+        </table>
     </div>
+
+    <!-- Ringkasan -->
+    <div class="summary-container">
+        <h2>Ringkasan</h2>
+        <p>Total Trades: <span id="totalTrades">0</span></p>
+        <p>Total Profit/Loss: <span id="totalPL">0</span></p>
+        <p>Rata-rata P/L per Trade: <span id="avgPL">0</span></p>
+        <p>Bitcoin Trades: <span id="btcTrades">0</span></p>
+        <p>Forex Trades: <span id="forexTrades">0</span></p>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
