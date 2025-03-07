@@ -178,7 +178,7 @@
                 if (asset.includes('USD') && !asset.includes('BTC') && !asset.includes('ETH')) { // Logika untuk forex (misalnya EURUSD)
                     const pipValue = 0.0001; // 1 pip
                     const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
-                    let baseProfit = pipDifference * 1.00 * amount; // 1 pip = $1.00 untuk 0.01 lot, jadi 0.01 lot = $0.01 per pip
+                    let baseProfit = pipDifference * 10.00 * amount; // 1 lot = $10 per pip, 0.01 lot = $0.10 per pip
                     profitLoss = type === 'buy' ? baseProfit : -baseProfit;
                 } else { // Logika untuk kripto (BTC, ETH, dll.)
                     profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
