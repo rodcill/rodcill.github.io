@@ -41,31 +41,39 @@ button:hover {
     background-color: #45a049;
 }
 
-.table-container table {
+.table-container table, .summary-container table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.table-container th, .table-container td {
+.table-container th, .table-container td,
+.summary-container th, .summary-container td {
     padding: 10px;
-    text-align: center; /* Rata tengah untuk kejelasan */
-    border: 1px solid #ddd; /* Garis pemisah antar sel */
+    text-align: center;
+    border: 1px solid #ddd;
 }
 
-.table-container th {
+.table-container th, .summary-container th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.table-container td {
+.table-container td, .summary-container td {
     background-color: #fff;
 }
 
-.table-container tr:nth-child(even) td {
-    background-color: #f9f9f9; /* Warna bergantian untuk baris */
+.table-container tr:nth-child(even) td,
+.summary-container tr:nth-child(even) td {
+    background-color: #f9f9f9;
 }
 
-.table-container tr:hover td {
-    background-color: #f1f1f1; /* Efek hover */
+.table-container tr:hover td,
+.summary-container tr:hover td {
+    background-color: #f1f1f1;
+}
+
+/* Khusus untuk tabel ringkasan agar lebih compact */
+.summary-container table {
+    max-width: 400px; /* Membatasi lebar tabel ringkasan */
 }
