@@ -21,34 +21,56 @@
         #transactionTable {
             width: 100%;
             border-collapse: collapse;
-            border: 2px solid #000; /* Garis luar tebal */
+            border: 1px solid #000; /* Garis luar */
         }
 
         #transactionTable th,
         #transactionTable td {
-            padding: 10px;
+            padding: 8px;
             text-align: center;
-            border: 1px solid #000 !important; /* Garis antar sel tebal */
+            border: 1px solid #000; /* Garis antar sel */
+            font-size: 14px;
+        }
+
+        #transactionTable th {
+            background-color: #d3d3d3; /* Warna abu-abu header */
+            font-weight: bold;
+        }
+
+        #transactionTable td {
+            background-color: #fff;
+        }
+
+        #transactionTable tr:nth-child(even) td {
+            background-color: #f0f0f0; /* Warna bergantian untuk baris */
+        }
+
+        #transactionTable tr:hover td {
+            background-color: #e0e0e0; /* Efek hover */
         }
     </style>
 </head>
 <body>
     <h1>Kalender Perdagangan Forex & Bitcoin</h1>
-    <p>[Debug: Jika Anda melihat teks ini, halaman dimuat dengan benar.]</p>
     
     <div class="table-container">
         <h2>Daftar Transaksi</h2>
         <table id="transactionTable">
             <thead>
                 <tr>
-                    <th>Tanggal</th>
-                    <th>Aset</th>
+                    <th>Waktu</th>
                     <th>Tipe</th>
-                    <th>Jumlah</th>
-                    <th>Harga Masuk</th>
-                    <th>Harga Keluar</th>
-                    <th>Profit/Loss</th>
-                    <th>Catatan</th>
+                    <th>Ukuran</th>
+                    <th>Simbol</th>
+                    <th>Harga</th>
+                    <th>Stop Loss</th>
+                    <th>T/P</th>
+                    <th>Waktu</th>
+                    <th>Harga</th>
+                    <th>Komisi</th>
+                    <th>Nilai Inap</th>
+                    <th>Laba/Rugi</th>
+                    <th>Komentar</th>
                 </tr>
             </thead>
             <tbody id="transactionBody">
@@ -60,14 +82,34 @@
     <script>
         let transactions = [
             {
-                date: "7/3/2025, 11:24:06",
-                asset: "ETHUSD",
+                openTime: "2025.03.07 03:07:07",
                 type: "buy",
-                amount: 0.01,
-                entry: 2250,
-                exit: 2300,
-                profitLoss: 0.50,
-                notes: "L1"
+                size: 0.01,
+                symbol: "BTCUSD",
+                openPrice: 85890.00,
+                stopLoss: 0.00,
+                takeProfit: 0.00,
+                closeTime: "2025.03.07 03:08:00",
+                closePrice: 86044.12,
+                commission: 0.00,
+                swap: 0.00,
+                profitLoss: 1.54,
+                comment: ""
+            },
+            {
+                openTime: "2025.03.07 03:07:22",
+                type: "sell",
+                size: 0.01,
+                symbol: "BTCUSD",
+                openPrice: 85421.15,
+                stopLoss: 0.00,
+                takeProfit: 0.00,
+                closeTime: "2025.03.07 03:08:03",
+                closePrice: 86035.32,
+                commission: 0.00,
+                swap: 0.00,
+                profitLoss: 0.00,
+                comment: "cancelled"
             }
         ];
 
@@ -78,14 +120,19 @@
             transactions.forEach(t => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${t.date}</td>
-                    <td>${t.asset}</td>
+                    <td>${t.openTime}</td>
                     <td>${t.type}</td>
-                    <td>${t.amount.toFixed}</td>
-                    <td>${t.entry.toFixed}</td>
-                    <td>${t.exit ? t.exit.toFixed(4) : '-'}</td>
-                    <td>${t.profitLoss !== null ? t.profitLoss.toFixed(2) : '-'}</td>
-                    <td>${t.notes || '-'}</td>
+                    <td>${t.size.toFixed(2)}</td>
+                    <td>${t.symbol}</td>
+                    <td>${t.openPrice.toFixed(2)}</td>
+                    <td>${t.stopLoss.toFixed(2)}</td>
+                    <td>${t.takeProfit.toFixed(2)}</td>
+                    <td>${t.closeTime}</td>
+                    <td>${t.closePrice.toFixed(2)}</td>
+                    <td>${t.commission.toFixed(2)}</td>
+                    <td>${t.swap.toFixed(2)}</td>
+                    <td>${t.profitLoss.toFixed(2)}</td>
+                    <td>${t.comment || '-'}</td>
                 `;
                 tbody.appendChild(row);
             });
