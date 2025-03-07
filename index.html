@@ -93,7 +93,7 @@
         <h2>Tambah Transaksi</h2>
         <form id="transactionForm">
             <label for="asset">Aset:</label>
-            <input type="text" id="asset" placeholder="EURUSD / BTC" required><br>
+            <input type="text" id="asset" placeholder="EURUSD / BTC / ETH" required><br>
             
             <label for="type">Tipe:</label>
             <select id="type" required>
@@ -152,6 +152,7 @@
                 <tr><td>Total Profit/Loss</td><td id="totalPL">0</td></tr>
                 <tr><td>Rata-rata P/L per Trade</td><td id="avgPL">0</td></tr>
                 <tr><td>Bitcoin Trades</td><td id="btcTrades">0</td></tr>
+                <tr><td>Ethereum Trades</td><td id="ethTrades">0</td></tr>
                 <tr><td>Forex Trades</td><td id="forexTrades">0</td></tr>
             </tbody>
         </table>
@@ -166,18 +167,22 @@
             // Ambil nilai dari form
             const asset = document.getElementById('asset').value.toUpperCase();
             const type = document.getElementById('type').value;
-            const amount = parseFloat(document.getElementById('amount').value); // Ukuran lot
+            const amount = parseFloat(document.getElementById('amount').value);
             const entry = parseFloat(document.getElementById('entry').value);
             const exit = document.getElementById('exit').value ? parseFloat(document.getElementById('exit').value) : null;
             const notes = document.getElementById('notes').value;
 
-            // Hitung profit/loss berdasarkan logika forex
+            // Hitung profit/loss berdasarkan jenis aset
             let profitLoss = null;
             if (exit !== null) {
-                const pipValue = 0.0001; // 1 pip untuk EURUSD
-                const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
-                let baseProfit = pipDifference * (amount * 1000) * 0.10; // Nilai pip untuk mikro lot (0.01 = $0.10/pip)
-                profitLoss = type === 'buy' ? baseProfit : -baseProfit; // Buy = profit, Sell = loss
+                if (asset.includes('USD') && !asset.includes('BTC') && !asset.includes('ETH')) { // Logika untuk forex (misalnya EURUSD)
+                    const pipValue = 0.0001; // 1 pip
+                    const pipDifference = Math.abs(exit - entry) / pipValue; // Selisih dalam pip
+                    let baseProfit = pipDifference * 1.00 * amount; // 1.00 = $1 per pip untuk 0.01 lot (sesuai keinginan)
+                    profitLoss = type === 'buy' ? baseProfit : -baseProfit;
+                } else { // Logika untuk kripto (BTC, ETH, dll.)
+                    profitLoss = type === 'buy' ? (exit - entry) * amount : (entry - exit) * amount;
+                }
             }
 
             // Tambahkan transaksi
@@ -228,12 +233,14 @@
             const totalPL = transactions.reduce((sum, t) => sum + (t.profitLoss || 0), 0);
             const avgPL = totalTrades > 0 ? totalPL / totalTrades : 0;
             const btcTrades = transactions.filter(t => t.asset === 'BTC').length;
-            const forexTrades = totalTrades - btcTrades;
+            const ethTrades = transactions.filter(t => t.asset === 'ETH').length;
+            const forexTrades = transactions.filter(t => t.asset.includes('USD') && !t.asset.includes('BTC') && !t.asset.includes('ETH')).length;
 
             document.getElementById('totalTrades').textContent = totalTrades;
             document.getElementById('totalPL').textContent = totalPL.toFixed(2);
             document.getElementById('avgPL').textContent = avgPL.toFixed(2);
             document.getElementById('btcTrades').textContent = btcTrades;
+            document.getElementById('ethTrades').textContent = ethTrades;
             document.getElementById('forexTrades').textContent = forexTrades;
         }
     </script>
