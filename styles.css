@@ -5,85 +5,21 @@ body {
     padding: 20px;
 }
 
-h1, h2 {
-    color: #333;
-}
-
-.form-container, .table-container, .summary-container {
+.table-container {
     margin: 20px 0;
     padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
 }
 
-.form-container label {
-    display: inline-block;
-    width: 120px;
-    margin: 5px 0;
-}
-
-.form-container input, .form-container select {
-    margin: 5px 0;
-    padding: 5px;
-    width: 200px;
-}
-
-button {
-    padding: 8px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Styling untuk semua tabel */
-table {
+#transactionTable {
     width: 100%;
     border-collapse: collapse; /* Pastikan garis tidak dobel */
-    margin-top: 10px;
-    border: 1px solid #333; /* Garis luar tabel */
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #333 !important; /* Garis antar sel, paksa dengan !important */
-    box-sizing: border-box; /* Pastikan padding tidak mengganggu border */
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-td {
-    background-color: #fff;
-}
-
-tr:nth-child(even) td {
-    background-color: #f9f9f9;
-}
-
-tr:hover td {
-    background-color: #f1f1f1;
-}
-
-/* Khusus untuk tabel ringkasan */
-#summaryTable {
-    max-width: 400px;
-}
-
-/* Khusus untuk tabel transaksi */
-#transactionTable {
-    border: 1px solid #333; /* Garis luar tabel transaksi */
+    border: 2px solid #000; /* Garis luar tebal dan jelas */
 }
 
 #transactionTable th,
 #transactionTable td {
-    border: 1px solid #333 !important; /* Memastikan garis muncul */
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000 !important; /* Garis antar sel tebal dan jelas */
 }
