@@ -44,14 +44,16 @@ button:hover {
 /* Styling untuk semua tabel */
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* Pastikan garis tidak dobel */
     margin-top: 10px;
+    border: 1px solid #333; /* Garis luar tabel */
 }
 
 th, td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #333; /* Garis lebih tebal dan jelas */
+    border: 1px solid #333 !important; /* Garis antar sel, paksa dengan !important */
+    box-sizing: border-box; /* Pastikan padding tidak mengganggu border */
 }
 
 th {
@@ -73,11 +75,15 @@ tr:hover td {
 
 /* Khusus untuk tabel ringkasan */
 #summaryTable {
-    max-width: 400px; /* Membatasi lebar */
+    max-width: 400px;
 }
 
-/* Pastikan tabel transaksi punya garis */
+/* Khusus untuk tabel transaksi */
+#transactionTable {
+    border: 1px solid #333; /* Garis luar tabel transaksi */
+}
+
 #transactionTable th,
 #transactionTable td {
-    border: 1px solid #333; /* Memastikan garis muncul */
+    border: 1px solid #333 !important; /* Memastikan garis muncul */
 }
