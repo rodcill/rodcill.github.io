@@ -58,14 +58,24 @@
         </table>
     </div>
 
-    <!-- Ringkasan -->
+    <!-- Tabel Ringkasan -->
     <div class="summary-container">
         <h2>Ringkasan</h2>
-        <p>Total Trades: <span id="totalTrades">0</span></p>
-        <p>Total Profit/Loss: <span id="totalPL">0</span></p>
-        <p>Rata-rata P/L per Trade: <span id="avgPL">0</span></p>
-        <p>Bitcoin Trades: <span id="btcTrades">0</span></p>
-        <p>Forex Trades: <span id="forexTrades">0</span></p>
+        <table id="summaryTable">
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Nilai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Total Trades</td><td id="totalTrades">0</td></tr>
+                <tr><td>Total Profit/Loss</td><td id="totalPL">0</td></tr>
+                <tr><td>Rata-rata P/L per Trade</td><td id="avgPL">0</td></tr>
+                <tr><td>Bitcoin Trades</td><td id="btcTrades">0</td></tr>
+                <tr><td>Forex Trades</td><td id="forexTrades">0</td></tr>
+            </tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>
