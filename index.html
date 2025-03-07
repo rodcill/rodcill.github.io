@@ -204,13 +204,16 @@
 
             transactions.forEach(t => {
                 const row = document.createElement('tr');
+                // Format harga tanpa nol tambahan jika bilangan bulat
+                const entryDisplay = Number.isInteger(t.entry) ? t.entry : t.entry.toFixed(4);
+                const exitDisplay = t.exit !== null ? (Number.isInteger(t.exit) ? t.exit : t.exit.toFixed(4)) : '-';
                 row.innerHTML = `
                     <td>${t.date}</td>
                     <td>${t.asset}</td>
                     <td>${t.type}</td>
                     <td>${t.amount.toFixed(2)}</td>
-                    <td>${t.entry.toFixed(4)}</td>
-                    <td>${t.exit ? t.exit.toFixed(4) : '-'}</td>
+                    <td>${entryDisplay}</td>
+                    <td>${exitDisplay}</td>
                     <td>${t.profitLoss !== null ? t.profitLoss.toFixed(2) : '-'}</td>
                     <td>${t.notes || '-'}</td>
                 `;
