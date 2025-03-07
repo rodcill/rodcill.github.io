@@ -19,7 +19,7 @@ document.getElementById('transactionForm').addEventListener('submit', function(e
 
     // Tambahkan transaksi
     const transaction = {
-        date: new Date().toLocaleString(),
+        date: new Date().toLocaleString('id-ID'), // Format tanggal lokal Indonesia
         asset,
         type,
         amount,
@@ -48,11 +48,11 @@ function updateTable() {
             <td>${t.date}</td>
             <td>${t.asset}</td>
             <td>${t.type}</td>
-            <td>${t.amount}</td>
-            <td>${t.entry}</td>
-            <td>${t.exit || '-'}</td>
+            <td>${t.amount.toFixed(2)}</td>
+            <td>${t.entry.toFixed(4)}</td>
+            <td>${t.exit ? t.exit.toFixed(4) : '-'}</td>
             <td>${t.profitLoss !== null ? t.profitLoss.toFixed(2) : '-'}</td>
-            <td>${t.notes}</td>
+            <td>${t.notes || '-'}</td>
         `;
         tbody.appendChild(row);
     });
