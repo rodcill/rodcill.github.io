@@ -4,41 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalender Perdagangan</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .table-container {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        #transactionTable {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #000; /* Garis luar tebal */
+        }
+
+        #transactionTable th,
+        #transactionTable td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #000 !important; /* Garis antar sel tebal */
+        }
+    </style>
 </head>
 <body>
     <h1>Kalender Perdagangan Forex & Bitcoin</h1>
+    <p>[Debug: Jika Anda melihat teks ini, halaman dimuat dengan benar.]</p>
     
-    <!-- Form untuk menambah transaksi -->
-    <div class="form-container">
-        <h2>Tambah Transaksi</h2>
-        <form id="transactionForm">
-            <label for="asset">Aset:</label>
-            <input type="text" id="asset" placeholder="EURUSD / BTC" required><br>
-            
-            <label for="type">Tipe:</label>
-            <select id="type" required>
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
-            </select><br>
-            
-            <label for="amount">Jumlah:</label>
-            <input type="number" id="amount" step="0.01" min="0" required><br>
-            
-            <label for="entry">Harga Masuk:</label>
-            <input type="number" id="entry" step="0.0001" min="0" required><br>
-            
-            <label for="exit">Harga Keluar (opsional):</label>
-            <input type="number" id="exit" step="0.0001" min="0"><br>
-            
-            <label for="notes">Catatan:</label>
-            <input type="text" id="notes" placeholder="Opsional"><br>
-            
-            <button type="submit">Tambah</button>
-        </form>
-    </div>
-
-    <!-- Tabel transaksi -->
     <div class="table-container">
         <h2>Daftar Transaksi</h2>
         <table id="transactionTable">
@@ -54,30 +51,47 @@
                     <th>Catatan</th>
                 </tr>
             </thead>
-            <tbody id="transactionBody"></tbody>
-        </table>
-    </div>
-
-    <!-- Tabel Ringkasan -->
-    <div class="summary-container">
-        <h2>Ringkasan</h2>
-        <table id="summaryTable">
-            <thead>
-                <tr>
-                    <th>Kategori</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>Total Trades</td><td id="totalTrades">0</td></tr>
-                <tr><td>Total Profit/Loss</td><td id="totalPL">0</td></tr>
-                <tr><td>Rata-rata P/L per Trade</td><td id="avgPL">0</td></tr>
-                <tr><td>Bitcoin Trades</td><td id="btcTrades">0</td></tr>
-                <tr><td>Forex Trades</td><td id="forexTrades">0</td></tr>
+            <tbody id="transactionBody">
+                <!-- Data akan diisi oleh JavaScript -->
             </tbody>
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let transactions = [
+            {
+                date: "7/3/2025, 11:24:06",
+                asset: "ETHUSD",
+                type: "buy",
+                amount: 0.01,
+                entry: 2250,
+                exit: 2300,
+                profitLoss: 0.50,
+                notes: "L1"
+            }
+        ];
+
+        function updateTable() {
+            const tbody = document.getElementById('transactionBody');
+            tbody.innerHTML = '';
+
+            transactions.forEach(t => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${t.date}</td>
+                    <td>${t.asset}</td>
+                    <td>${t.type}</td>
+                    <td>${t.amount.toFixed}</td>
+                    <td>${t.entry.toFixed}</td>
+                    <td>${t.exit ? t.exit.toFixed(4) : '-'}</td>
+                    <td>${t.profitLoss !== null ? t.profitLoss.toFixed(2) : '-'}</td>
+                    <td>${t.notes || '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        updateTable();
+    </script>
 </body>
 </html>
